@@ -3,137 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Key Qty Reference</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Key Qty Defaults</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#0d1117;--surface:#161b22;--surface-hover:#1c2129;
-  --border:#30363d;--border-light:#484f58;
-  --text:#e6edf3;--text-2:#7d8590;--text-3:#484f58;
-  --amber:#d29922;--amber-dim:rgba(210,153,34,.12);
-  --green:#3fb950;--green-dim:rgba(63,185,80,.12);
-  --red:#f85149;--red-dim:rgba(248,81,73,.12);
-  --blue:#58a6ff;--blue-dim:rgba(88,166,255,.12);
-  --radius:6px;--font:'Inter',system-ui,-apple-system,sans-serif;
-}
-html{font-size:14px;scrollbar-color:var(--border) var(--bg)}
-body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh}
-::selection{background:var(--amber);color:var(--bg)}
-::-webkit-scrollbar{width:8px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
-::-webkit-scrollbar-thumb:hover{background:var(--border-light)}
-
-.shell{max-width:1200px;margin:0 auto;padding:0 24px}
-header{border-bottom:1px solid var(--border);padding:20px 0 16px}
-.hdr-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.hdr-left h1{font-size:1.25rem;font-weight:600;letter-spacing:-.01em}
-.hdr-left h1 span{color:var(--amber);margin-right:6px}
-.hdr-left p{font-size:.8rem;color:var(--text-2);margin-top:2px}
-
-
-/* Instructions banner */
-.instructions{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin:20px 0;font-size:.82rem;color:var(--text-2);line-height:1.6}
-.instructions h3{color:var(--text);font-size:.9rem;font-weight:600;margin-bottom:6px}
-.instructions ul{margin:6px 0 0 18px}
-.instructions li{margin-bottom:3px}
-.instructions strong{color:var(--text)}
-.instructions .dismiss{float:right;background:none;border:none;color:var(--text-3);cursor:pointer;font-size:1.1rem;padding:0 4px;margin-top:-4px}
-.instructions .dismiss:hover{color:var(--text)}
-
-/* Sections */
-main{padding:20px 0 80px}
-.section{margin-bottom:32px}
-.section-hdr{margin-bottom:10px}
-.section-hdr h2{font-size:.95rem;font-weight:600;color:var(--text);display:flex;align-items:center;gap:8px}
-.section-hdr h2 .tag{font-size:.65rem;font-weight:500;color:var(--amber);background:var(--amber-dim);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.03em}
-.section-hdr p{font-size:.78rem;color:var(--text-2);margin-top:2px}
-
-/* Table */
-.tbl-wrap{border:1px solid var(--border);border-radius:var(--radius);overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:800px}
-th{text-align:left;font-size:.7rem;font-weight:600;color:var(--text-2);text-transform:uppercase;letter-spacing:.05em;padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--border);white-space:nowrap}
-th.c-qty{width:70px;text-align:center}
-th.c-status{width:100px;text-align:center}
-th.c-examples{width:140px}
-th.c-notes{width:220px}
-th.c-review{min-width:180px}
-td{padding:7px 12px;border-bottom:1px solid var(--border);vertical-align:top;font-size:.835rem}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:#0d1117;color:#e6edf3;padding:32px 24px 60px;max-width:900px;margin:0 auto;font-size:14px;line-height:1.5}
+h1{font-size:1.15rem;font-weight:600;margin-bottom:4px}
+.subtitle{font-size:.78rem;color:#7d8590;margin-bottom:24px}
+table{width:100%;border-collapse:collapse;border:1px solid #30363d;border-radius:6px;overflow:hidden}
+th{text-align:left;font-size:.7rem;font-weight:600;color:#7d8590;text-transform:uppercase;letter-spacing:.04em;padding:8px 14px;background:#161b22;border-bottom:1px solid #30363d}
+th.col-qty{width:65px;text-align:center}
+th.col-notes{width:40%}
+td{padding:8px 14px;border-bottom:1px solid #21262d;vertical-align:top;font-size:.84rem}
 tr:last-child td{border-bottom:none}
-tr:hover td{background:var(--surface-hover)}
-tr.changed td{animation:flash .6s ease}
-@keyframes flash{0%{background:var(--amber-dim)}100%{background:transparent}}
-td.cell-name{font-weight:500;color:var(--text);white-space:nowrap}
-td.cell-ex{color:var(--text-2);font-size:.78rem;font-family:'SF Mono','Cascadia Code',Consolas,monospace}
-td.cell-qty{text-align:center}
-td.cell-status{text-align:center}
-
-/* Editable fields */
-.edit-qty{width:44px;background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:4px;padding:3px 4px;text-align:center;font-size:.835rem;font-family:var(--font);transition:border-color .1s}
-.edit-qty:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 2px var(--amber-dim)}
-.edit-qty.empty{color:var(--text-3);font-style:italic}
-.notes-text{font-size:.78rem;color:var(--text-2);line-height:1.4}
-.edit-review{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:4px;padding:5px 8px;font-size:.78rem;font-family:var(--font);resize:none;line-height:1.4;transition:border-color .1s}
-.edit-review:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 2px var(--amber-dim)}
-.edit-review::placeholder{color:var(--text-3)}
-
-/* Status badges */
-.status-pill{display:inline-block;font-size:.68rem;font-weight:500;padding:2px 8px;border-radius:10px;letter-spacing:.02em;cursor:pointer;user-select:none;transition:all .15s}
-.status-pill.needs-review{background:var(--amber-dim);color:var(--amber);border:1px solid rgba(210,153,34,.25)}
-.status-pill.confirmed{background:var(--green-dim);color:var(--green);border:1px solid rgba(63,185,80,.25)}
-.status-pill.changed{background:var(--blue-dim);color:var(--blue);border:1px solid rgba(88,166,255,.25)}
-.status-pill:hover{filter:brightness(1.2)}
-
-/* Activity log */
-.activity{margin-top:8px;padding-bottom:60px}
-.activity-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;cursor:pointer;user-select:none}
-.activity-hdr h2{font-size:.9rem;font-weight:600;display:flex;align-items:center;gap:6px}
-.activity-hdr .count{font-size:.7rem;background:var(--surface);color:var(--text-2);padding:1px 7px;border-radius:10px;border:1px solid var(--border)}
-.activity-hdr .arrow{color:var(--text-3);transition:transform .2s;font-size:.75rem}
-.activity-hdr .arrow.open{transform:rotate(90deg)}
-.log-list{max-height:320px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}
-.log-item{padding:8px 14px;border-bottom:1px solid var(--border);font-size:.78rem;display:flex;gap:10px;align-items:flex-start}
-.log-item:last-child{border-bottom:none}
-.log-icon{flex-shrink:0;margin-top:2px}
-.log-body{flex:1;min-width:0}
-.log-body strong{color:var(--text);font-weight:500}
-.log-body .diff{margin-top:2px}
-.log-body .old{color:var(--red);text-decoration:line-through}
-.log-body .new{color:var(--green)}
-.log-meta{color:var(--text-3);font-size:.7rem;margin-top:1px}
-.log-empty{padding:20px;text-align:center;color:var(--text-3);font-size:.8rem}
-
-/* Toasts */
-.toast-box{position:fixed;top:16px;right:16px;z-index:999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
-.toast{pointer-events:auto;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:10px 16px;font-size:.8rem;color:var(--text);box-shadow:0 4px 24px rgba(0,0,0,.4);display:flex;align-items:center;gap:8px;animation:slideIn .25s ease;max-width:380px}
+tr:hover td{background:#161b22}
+td.name{font-weight:500}
+td.desc{color:#7d8590;font-size:.78rem}
+td.qty{text-align:center}
+.qty-input{width:44px;background:#161b22;border:1px solid #30363d;color:#e6edf3;border-radius:4px;padding:3px 4px;text-align:center;font-size:.84rem;font-family:inherit}
+.qty-input:focus{outline:none;border-color:#d29922;box-shadow:0 0 0 2px rgba(210,153,34,.15)}
+.qty-input.unknown{color:#484f58;font-style:italic}
+.note-input{width:100%;background:#0d1117;border:1px solid #30363d;color:#e6edf3;border-radius:4px;padding:5px 8px;font-size:.78rem;font-family:inherit;resize:none;line-height:1.4}
+.note-input:focus{outline:none;border-color:#d29922;box-shadow:0 0 0 2px rgba(210,153,34,.15)}
+.note-input::placeholder{color:#484f58}
+.toast-box{position:fixed;top:16px;right:16px;z-index:99;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast{pointer-events:auto;background:#161b22;border:1px solid #30363d;border-left:3px solid #d29922;border-radius:6px;padding:10px 16px;font-size:.8rem;color:#e6edf3;box-shadow:0 4px 20px rgba(0,0,0,.4);animation:slideIn .25s ease;max-width:340px}
 .toast.out{animation:slideOut .2s ease forwards}
 @keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
-@keyframes slideOut{from{transform:translateX(0);opacity:1}to{transform:translateX(100%);opacity:0}}
-.toast .t-icon{flex-shrink:0}
-.toast.t-info{border-left:3px solid var(--blue)}
-.toast.t-success{border-left:3px solid var(--green)}
-.toast.t-warning{border-left:3px solid var(--amber)}
-.toast.t-change{border-left:3px solid var(--amber)}
-
-/* Name modal */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:900;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .15s}
+@keyframes slideOut{from{opacity:1}to{opacity:0}}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:90;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .15s}
 .modal-bg.open{opacity:1;pointer-events:auto}
-.modal{background:var(--surface);border:1px solid var(--border);border-radius:8px;width:380px;max-width:90vw;padding:24px;text-align:center}
-.modal h3{font-size:1rem;font-weight:600;margin-bottom:4px}
-.modal p{font-size:.78rem;color:var(--text-2);margin-bottom:16px}
-.modal input{width:100%;max-width:220px;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:4px;padding:8px 12px;font-size:.9rem;font-family:var(--font);text-align:center}
-.modal input:focus{outline:none;border-color:var(--amber)}
-.modal .btn{margin-top:14px;padding:7px 24px;border-radius:var(--radius);font-size:.835rem;font-family:var(--font);font-weight:500;cursor:pointer;background:var(--amber);color:var(--bg);border:none;transition:filter .1s}
-.modal .btn:hover{filter:brightness(1.1)}
-
-
-
-@media(max-width:768px){
-  .shell{padding:0 12px}
-  th.c-examples,td.cell-ex{display:none}
-}
+.modal{background:#161b22;border:1px solid #30363d;border-radius:8px;width:340px;padding:24px;text-align:center}
+.modal h3{font-size:1rem;font-weight:600;margin-bottom:6px}
+.modal p{font-size:.78rem;color:#7d8590;margin-bottom:14px}
+.modal input{background:#0d1117;border:1px solid #30363d;color:#e6edf3;border-radius:4px;padding:8px 12px;font-size:.9rem;font-family:inherit;text-align:center;width:180px}
+.modal input:focus{outline:none;border-color:#d29922}
+.modal button{margin-top:12px;padding:7px 22px;background:#d29922;color:#0d1117;border:none;border-radius:6px;font-size:.84rem;font-family:inherit;font-weight:500;cursor:pointer}
+.modal button:hover{filter:brightness(1.1)}
+.log-section{margin-top:28px}
+.log-toggle{font-size:.82rem;color:#7d8590;cursor:pointer;user-select:none;display:flex;align-items:center;gap:6px}
+.log-toggle:hover{color:#e6edf3}
+.log-toggle .ct{font-size:.7rem;background:#21262d;padding:1px 6px;border-radius:8px}
+.log-list{margin-top:8px;border:1px solid #30363d;border-radius:6px;background:#161b22;max-height:280px;overflow-y:auto}
+.log-item{padding:7px 14px;border-bottom:1px solid #21262d;font-size:.76rem;color:#7d8590}
+.log-item:last-child{border-bottom:none}
+.log-item strong{color:#e6edf3;font-weight:500}
+.log-item .old{color:#f85149;text-decoration:line-through}
+.log-item .new{color:#3fb950}
+tr.flash td{animation:rowFlash .5s ease}
+@keyframes rowFlash{0%{background:rgba(210,153,34,.12)}100%{background:transparent}}
 </style>
 </head>
 <body>
@@ -142,473 +60,192 @@ td.cell-status{text-align:center}
 
 <div class="modal-bg" id="nameModal">
   <div class="modal">
-    <h3>Who's viewing?</h3>
-    <p>Enter your name so changes are tracked.</p>
-    <input type="text" id="nameInput" placeholder="Your first name" maxlength="30">
-    <br><button class="btn" onclick="saveName()">Continue</button>
+    <h3>Your name?</h3>
+    <p>So we can track who made changes.</p>
+    <input type="text" id="nameInput" placeholder="First name" maxlength="20">
+    <br><button onclick="saveName()">Continue</button>
   </div>
 </div>
 
-<div class="shell">
-  <header>
-    <div class="hdr-row">
-      <div class="hdr-left">
-        <h1><span>&#9670;</span>Key Qty Reference</h1>
-        <p>Default key quantities by product type &mdash; Schlage / Allegion</p>
-      </div>
-    </div>
-  </header>
+<h1>Default Key Quantities</h1>
+<div class="subtitle">Click any quantity or notes field to edit. Changes save automatically.</div>
 
-  <div class="instructions" id="helpBanner">
-    <button class="dismiss" onclick="dismissHelp()" title="Hide instructions">&times;</button>
-    <h3>How this works</h3>
-    <ul>
-      <li><strong>Default column</strong> &mdash; Click any number to change the default key quantity for that situation.</li>
-      <li><strong>Reviewer Notes column</strong> &mdash; Use this to leave corrections, comments, or explanations. Type anything you want.</li>
-      <li><strong>Status column</strong> &mdash; Click the label to cycle through: <em>Needs Review</em> &rarr; <em>Confirmed</em> &rarr; <em>Changed</em>. Mark "Confirmed" if the quantity is correct, or "Changed" if you adjusted it.</li>
-      <li><strong>Everything auto-saves.</strong> Changes sync across all open windows within a few seconds. The activity log at the bottom shows who changed what and when.</li>
-    </ul>
+<table>
+  <thead>
+    <tr>
+      <th style="width:200px">Situation</th>
+      <th>Description</th>
+      <th class="col-qty">Qty</th>
+      <th class="col-notes">Notes</th>
+    </tr>
+  </thead>
+  <tbody id="tbody"></tbody>
+</table>
+
+<div class="log-section">
+  <div class="log-toggle" onclick="toggleLog()">
+    <span id="logArrow">&#9654;</span> Change History <span class="ct" id="logCount">0</span>
   </div>
-
-  <main id="main"></main>
-
-  <div class="activity" id="activitySection">
-    <div class="activity-hdr" onclick="toggleLog()">
-      <h2>Activity Log <span class="count" id="logCount">0</span></h2>
-      <span class="arrow" id="logArrow">&#9654;</span>
-    </div>
-    <div id="logWrap" style="display:none"></div>
-  </div>
+  <div id="logWrap" style="display:none"></div>
 </div>
-
-
 
 <script>
-const REPO = 'NoLimitNexus/mk-key-ref';
-const DATA_PATH = 'data.json';
-const GH_TOKEN = ['g','h','o','_','6ab6ig','BMkyAy','RKAyGb','jPq8P0','rI5xzN','4Att1O'].join('');
+const REPO='NoLimitNexus/mk-key-ref',DATA_PATH='data.json';
+const GH_TOKEN=['g','h','o','_','6ab6ig','BMkyAy','RKAyGb','jPq8P0','rI5xzN','4Att1O'].join('');
 
-const STATUS_CYCLE = ['needs-review','confirmed','changed'];
-const STATUS_LABELS = {'needs-review':'Needs Review','confirmed':'Confirmed','changed':'Changed'};
+const ITEMS=[
+  {id:'ck',name:'Change Key',desc:'Standard change key cylinder. Keys unique to each door.',qty:2,note:''},
+  {id:'skd',name:'SKD (Single Keyed Different)',desc:'Same as a change key but called out separately on the order.',qty:2,note:''},
+  {id:'nmk',name:'NMK (Not Master Keyed)',desc:'Keyed to its own symbol but not part of the master hierarchy.',qty:2,note:''},
+  {id:'ka',name:'KA (Keyed Alike)',desc:'Multiple cylinders sharing the same key. Often specified per group.',qty:2,note:''},
+  {id:'mk',name:'Master Key Cylinder',desc:'Cylinder keyed under a master. No keys ship with the cylinder itself.',qty:0,note:''},
+  {id:'submaster',name:'Sub-Master Cylinder',desc:'Cylinder keyed under a sub-master.',qty:0,note:''},
+  {id:'gm',name:'Grand Master Cylinder',desc:'Cylinder keyed under the grand master.',qty:0,note:''},
+  {id:'ggm',name:'GGM / TMK Cylinder',desc:'Top-level master cylinder. Keys ordered on a separate cut key line.',qty:0,note:''},
+  {id:'selective',name:'Selective Master Cylinder',desc:'Cross-keyed to a selective master path.',qty:0,note:''},
+  {id:'x13x',name:'X13X Cross-Keyed (no own key)',desc:'Cross-keyed cylinder with no change key of its own.',qty:0,note:''},
+  {id:'x_with_key',name:'Cross-Keyed WITH Own Key',desc:'Cross-keyed cylinder that also has its own change key symbol.',qty:2,note:''},
+  {id:'x_prefix',name:'X-Prefix + Symbol (e.g. XLA12)',desc:'Pinning is same as the base symbol. The X just documents the cross-keying. Keys are included.',qty:2,note:''},
+  {id:'lkb',name:'LKB (Less Key Blank)',desc:'Cylinder is pinned but no physical keys ship.',qty:0,note:''},
+  {id:'const_core',name:'Construction Key Core',desc:'Core furnished without keys. Operating and control keys must be added manually.',qty:0,note:''},
+  {id:'zero_bit',name:'Zero Bitted',desc:'Cylinder shipped with all pins at zero. No operating key, used for temporary or field re-key.',qty:0,note:''},
+  {id:'control',name:'Control Key',desc:'Used with SFIC/FSIC to remove and swap cores.',qty:1,note:''},
+  {id:'new_master',name:'New Master Key (cut key order)',desc:'Ordering new cut master keys on a separate line item.',qty:2,note:''},
+  {id:'new_gm',name:'New Grand Master Key (cut key order)',desc:'Ordering new cut grand master keys on a separate line item.',qty:2,note:''},
+  {id:'new_ggm',name:'New GGM/TMK Key (cut key order)',desc:'Ordering new cut top master keys on a separate line item.',qty:2,note:''},
+  {id:'emergency',name:'Emergency Key',desc:'For 85/86 function locksets.',qty:null,note:''},
+];
 
-const DEFAULT_DATA = {
-  v:1,
-  categories:[
-    {
-      id:'cylinders', name:'Cylinders / Cores',
-      sub:'Keys Each values used in OET for cylinder & core line items',
-      items:[
-        {id:'ck',name:'Change Key (CK)',ex:'AA1, LB3, MC7',qty:2,notes:'Standard default. 2 cut keys ship with each cylinder.',review:'',status:'needs-review'},
-        {id:'skd',name:'SKD (Single Keyed Different)',ex:'',qty:2,notes:'Gets its own unique change key. Same default as CK.',review:'',status:'needs-review'},
-        {id:'nmk',name:'NMK (Not Master Keyed)',ex:'',qty:2,notes:'Keyed to specific symbol but excluded from master hierarchy.',review:'',status:'needs-review'},
-        {id:'mk_cyl',name:'Master Key Cylinder',ex:'AA, MB, L',qty:0,notes:'Ships with 0 keys. Masters ordered on separate cut key line.',review:'',status:'needs-review'},
-        {id:'gm_cyl',name:'Grand Master Cylinder',ex:'',qty:0,notes:'Same as master \u2014 keys ordered separately.',review:'',status:'needs-review'},
-        {id:'ggm_cyl',name:'GGM / TMK Cylinder',ex:'',qty:0,notes:'Keys ordered separately.',review:'',status:'needs-review'},
-        {id:'sel_cyl',name:'Selective Master Cylinder',ex:'ENG, HKP',qty:0,notes:'Keys ordered separately.',review:'',status:'needs-review'},
-        {id:'x13x',name:'X13X Cross-Keyed (no own key)',ex:'X13X, X1X',qty:0,notes:'No key symbol of its own \u2192 no keys to ship.',review:'',status:'needs-review'},
-        {id:'xaa1',name:'XAA1 Cross-Keyed (HAS own key)',ex:'XAC11',qty:2,notes:'Has own change key symbol \u2192 gets keys for that symbol.',review:'',status:'needs-review'},
-        {id:'xla12',name:'X-Prefix + Symbol',ex:'XLA12, XMB3',qty:2,notes:'Pinning identical to base symbol. X documents cross-keying. Keys included.',review:'',status:'needs-review'},
-        {id:'ka',name:'KA (Keyed Alike)',ex:'',qty:2,notes:'2 per cylinder default. Customer often specifies total per group.',review:'',status:'needs-review'},
-        {id:'lkb',name:'LKB (Less Key Blank)',ex:'',qty:0,notes:'Explicitly no keys ship. Cylinder pinned but no physical keys.',review:'',status:'needs-review'},
-        {id:'const_core',name:'Construction Key (CK Split Key)',ex:'',qty:0,notes:'Furnished WITHOUT keys. Must add operating + control key manually.',review:'',status:'needs-review'},
-      ]
-    },
-    {
-      id:'cut_keys', name:'Cut Key Line Items',
-      sub:'Quantities per symbol when ordering keys on a separate line',
-      items:[
-        {id:'mk_cut',name:'Master Key',ex:'48-xxx',qty:2,notes:'Believed to be 2 per symbol.',review:'',status:'needs-review'},
-        {id:'gm_cut',name:'Grand Master Key',ex:'',qty:2,notes:'Needs verification.',review:'',status:'needs-review'},
-        {id:'ggm_cut',name:'GGM / TMK',ex:'',qty:2,notes:'Needs verification.',review:'',status:'needs-review'},
-        {id:'sel_cut',name:'Selective Master',ex:'',qty:2,notes:'Needs verification.',review:'',status:'needs-review'},
-        {id:'ctrl_fsic',name:'Control Key (FSIC/SFIC)',ex:'',qty:1,notes:'Believed 1 per system, not per cylinder.',review:'',status:'needs-review'},
-        {id:'ctrl_7pin',name:'Control Key (7-pin)',ex:'CONL',qty:1,notes:'Same question as standard control.',review:'',status:'needs-review'},
-        {id:'const_op',name:'Construction Operating Key',ex:'',qty:1,notes:'Must be manually added.',review:'',status:'needs-review'},
-        {id:'const_ctrl',name:'Construction Control Key',ex:'',qty:1,notes:'Must be manually added.',review:'',status:'needs-review'},
-        {id:'emergency',name:'Emergency Key',ex:'85/86 function',qty:null,notes:'Need to determine standard default.',review:'',status:'needs-review'},
-        {id:'submaster_cut',name:'Sub-Master Key',ex:'AAA, AAB',qty:2,notes:'Needs verification.',review:'',status:'needs-review'},
-      ]
-    },
-    {
-      id:'special', name:'Special Products',
-      sub:'Variable or order-specific quantities',
-      items:[
-        {id:'blanks',name:'Key Blanks (uncut)',ex:'',qty:null,notes:'No standard default \u2014 qty per customer order.',review:'',status:'needs-review'},
-        {id:'extra_cut',name:'Extra Cut Keys',ex:'50-214, 50-232',qty:null,notes:'Debit/credit balance items.',review:'',status:'needs-review'},
-        {id:'pki',name:'PKI (Pack Keys Independently)',ex:'60-001',qty:null,notes:'Service charge, not a key quantity.',review:'',status:'needs-review'},
-      ]
-    }
-  ],
-  changelog:[]
-};
+let data=null, userName=localStorage.getItem('mkref_name')||'', remoteSha=null, pollTimer=null, saveTimer=null, logOpen=false, lastSync=null;
 
-// State
-let data = null;
-let userName = localStorage.getItem('mkref_name') || '';
-let remoteSha = null;
-let pollTimer = null;
-let saveDebounce = null;
-let logOpen = false;
-let lastSyncTime = null;
-
-// Init
-document.addEventListener('DOMContentLoaded', async () => {
-  data = await loadData();
-  renderAll();
-  updateStatusBar();
-  if (!userName) {
-    document.getElementById('nameModal').classList.add('open');
-    document.getElementById('nameInput').focus();
-  }
-  startPolling();
-  // Hide help if dismissed before
-  if (localStorage.getItem('mkref_help_dismissed')) {
-    document.getElementById('helpBanner').style.display = 'none';
-  }
+document.addEventListener('DOMContentLoaded', async()=>{
+  data=await load();
+  render();
+  if(!userName){document.getElementById('nameModal').classList.add('open');document.getElementById('nameInput').focus();}
+  pollTimer=setInterval(poll,10000);
 });
 
-async function loadData() {
-  try {
-    const d = await ghFetch();
-    if (d) { localStorage.setItem('mkref_data', JSON.stringify(d)); return d; }
-  } catch(e) { console.warn('Remote load failed:', e); }
-  const local = localStorage.getItem('mkref_data');
-  if (local) try { return JSON.parse(local); } catch(e) {}
-  return JSON.parse(JSON.stringify(DEFAULT_DATA));
+async function load(){
+  try{
+    const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`,{headers:{'Authorization':`Bearer ${GH_TOKEN}`,'Accept':'application/vnd.github.v3+json'}});
+    if(r.ok){const j=await r.json();remoteSha=j.sha;lastSync=Date.now();const d=JSON.parse(atob(j.content));localStorage.setItem('mkref_data',JSON.stringify(d));return d;}
+  }catch(e){}
+  const local=localStorage.getItem('mkref_data');
+  if(local)try{return JSON.parse(local)}catch(e){}
+  return{items:JSON.parse(JSON.stringify(ITEMS)),changelog:[]};
 }
 
-// GitHub API
-async function ghFetch() {
-  const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`, {
-    headers: {'Authorization': `Bearer ${GH_TOKEN}`, 'Accept': 'application/vnd.github.v3+json'}
-  });
-  if (!r.ok) return null;
-  const j = await r.json();
-  remoteSha = j.sha;
-  lastSyncTime = Date.now();
-  updateSyncBadge('ok','Synced');
-  return JSON.parse(atob(j.content));
-}
-
-async function ghSave(msg) {
-  try {
-    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`, {
-      headers: {'Authorization': `Bearer ${GH_TOKEN}`, 'Accept': 'application/vnd.github.v3+json'}
+async function save(msg){
+  localStorage.setItem('mkref_data',JSON.stringify(data));
+  try{
+    const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`,{headers:{'Authorization':`Bearer ${GH_TOKEN}`,'Accept':'application/vnd.github.v3+json'}});
+    if(r.ok)remoteSha=(await r.json()).sha;
+  }catch(e){}
+  try{
+    const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`,{
+      method:'PUT',headers:{'Authorization':`Bearer ${GH_TOKEN}`,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+      body:JSON.stringify({message:msg||'Update',content:btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2)))),sha:remoteSha})
     });
-    if (r.ok) remoteSha = (await r.json()).sha;
-  } catch(e) {}
-  const body = {
-    message: msg || 'Update',
-    content: btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2)))),
-    sha: remoteSha
-  };
-  const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`, {
-    method:'PUT',
-    headers: {'Authorization': `Bearer ${GH_TOKEN}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json'},
-    body: JSON.stringify(body)
-  });
-  if (r.ok) { remoteSha = (await r.json()).content.sha; lastSyncTime = Date.now(); return true; }
-  return false;
+    if(r.ok){remoteSha=(await r.json()).content.sha;lastSync=Date.now();}
+  }catch(e){}
 }
 
-// Polling
-function startPolling() {
-  if (pollTimer) clearInterval(pollTimer);
-  pollTimer = setInterval(pollRemote, 10000);
-}
-
-async function pollRemote() {
-  try {
-    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`, {
-      headers: {'Authorization': `Bearer ${GH_TOKEN}`, 'Accept': 'application/vnd.github.v3+json'}
-    });
-    if (!r.ok) return;
-    const j = await r.json();
-    if (j.sha !== remoteSha) {
-      remoteSha = j.sha;
-      const remote = JSON.parse(atob(j.content));
-      mergeRemote(remote);
+async function poll(){
+  try{
+    const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`,{headers:{'Authorization':`Bearer ${GH_TOKEN}`,'Accept':'application/vnd.github.v3+json'}});
+    if(!r.ok)return;const j=await r.json();
+    if(j.sha!==remoteSha){remoteSha=j.sha;const remote=JSON.parse(atob(j.content));
+      const diffs=[];
+      for(const ri of remote.items){const li=data.items.find(i=>i.id===ri.id);if(!li)continue;
+        if(ri.qty!==li.qty)diffs.push({name:ri.name,f:'qty',o:li.qty,n:ri.qty});
+        if((ri.note||'')!==(li.note||''))diffs.push({name:ri.name,f:'note',o:li.note,n:ri.note});
+      }
+      if(diffs.length){data=remote;localStorage.setItem('mkref_data',JSON.stringify(data));render();
+        for(const d of diffs){const l=d.f==='qty'?`qty: ${d.o??'?'} \u2192 ${d.n??'?'}`:'note updated';
+          toast(`${d.name} \u2014 ${l}`);}
+      }
     }
-    lastSyncTime = Date.now();
-    updateSyncBadge('ok','Synced');
-    updateStatusBar();
-  } catch(e) {}
+  }catch(e){}
 }
 
-function mergeRemote(remote) {
-  const diffs = [];
-  for (const rCat of remote.categories) {
-    const lCat = data.categories.find(c => c.id === rCat.id);
-    if (!lCat) continue;
-    for (const rItem of rCat.items) {
-      const lItem = lCat.items.find(i => i.id === rItem.id);
-      if (!lItem) continue;
-      if (rItem.qty !== lItem.qty) diffs.push({name:rItem.name, field:'qty', old:lItem.qty, nw:rItem.qty});
-      if ((rItem.review||'') !== (lItem.review||'')) diffs.push({name:rItem.name, field:'review', old:lItem.review, nw:rItem.review});
-      if (rItem.status !== lItem.status) diffs.push({name:rItem.name, field:'status', old:lItem.status, nw:rItem.status});
-    }
-  }
-  if (!diffs.length) return;
-  data = remote;
-  localStorage.setItem('mkref_data', JSON.stringify(data));
-  renderAll();
-  for (const d of diffs) {
-    const label = d.field === 'qty' ? `qty: ${d.old ?? '?'} \u2192 ${d.nw ?? '?'}` :
-                  d.field === 'status' ? `status \u2192 ${STATUS_LABELS[d.nw]||d.nw}` : 'reviewer note updated';
-    toast(`<strong>${d.name}</strong> \u2014 ${label}`, 'change');
-  }
-}
-
-// Save
-function saveLocal() { localStorage.setItem('mkref_data', JSON.stringify(data)); }
-
-function scheduleSave(msg) {
-  saveLocal();
-  updateSyncBadge('working','Saving\u2026');
-  clearTimeout(saveDebounce);
-  saveDebounce = setTimeout(async () => {
-    const ok = await ghSave(msg);
-    updateSyncBadge(ok ? 'ok' : 'off', ok ? 'Synced' : 'Error');
-    updateStatusBar();
-  }, 1500);
-}
-
-// Change tracking
-function recordChange(itemId, itemName, field, oldVal, newVal) {
-  data.changelog.unshift({
-    ts: new Date().toISOString(),
-    who: userName || 'Unknown',
-    itemId, itemName, field,
-    oldVal: oldVal === null ? null : String(oldVal),
-    newVal: newVal === null ? null : String(newVal)
-  });
-  if (data.changelog.length > 200) data.changelog.length = 200;
-  scheduleSave(`${userName||'User'}: ${itemName} ${field} ${oldVal??'?'} \u2192 ${newVal??'?'}`);
+function render(){
+  const tb=document.getElementById('tbody');tb.innerHTML='';
+  for(const item of data.items)tb.appendChild(makeRow(item));
   renderLog();
 }
 
-// Rendering
-function renderAll() {
-  const main = document.getElementById('main');
-  main.innerHTML = '';
-  for (const cat of data.categories) main.appendChild(renderSection(cat));
-  renderLog();
-  updateStatusBar();
-}
+function makeRow(item){
+  const tr=document.createElement('tr');tr.dataset.id=item.id;
 
-function renderSection(cat) {
-  const sec = document.createElement('div');
-  sec.className = 'section';
-  sec.innerHTML = `<div class="section-hdr">
-    <h2>${cat.name} <span class="tag">${cat.items.length} items</span></h2>
-    <p>${cat.sub||''}</p>
-  </div>`;
-  const wrap = document.createElement('div');
-  wrap.className = 'tbl-wrap';
-  const table = document.createElement('table');
-  table.innerHTML = `<thead><tr>
-    <th style="width:195px">Situation</th>
-    <th class="c-examples">Examples</th>
-    <th class="c-qty">Default</th>
-    <th class="c-notes">Description</th>
-    <th class="c-review">Reviewer Notes</th>
-    <th class="c-status">Status</th>
-  </tr></thead>`;
-  const tbody = document.createElement('tbody');
-  for (const item of cat.items) tbody.appendChild(renderRow(item, cat.id));
-  table.appendChild(tbody);
-  wrap.appendChild(table);
-  sec.appendChild(wrap);
-  return sec;
-}
+  const tdN=document.createElement('td');tdN.className='name';tdN.textContent=item.name;
+  const tdD=document.createElement('td');tdD.className='desc';tdD.textContent=item.desc||'';
 
-function renderRow(item, catId) {
-  const tr = document.createElement('tr');
-  tr.dataset.id = item.id;
-
-  // Name
-  const tdN = document.createElement('td');
-  tdN.className = 'cell-name';
-  tdN.textContent = item.name;
-
-  // Examples
-  const tdE = document.createElement('td');
-  tdE.className = 'cell-ex';
-  tdE.textContent = item.ex || '\u2014';
-
-  // Qty
-  const tdQ = document.createElement('td');
-  tdQ.className = 'cell-qty';
-  const qi = document.createElement('input');
-  qi.type = 'text';
-  qi.className = 'edit-qty' + (item.qty === null ? ' empty' : '');
-  qi.value = item.qty !== null ? item.qty : '?';
-  qi.addEventListener('focus', function(){ if(this.value==='?') this.value=''; this.select(); });
-  qi.addEventListener('blur', function(){ handleQtyChange(this, catId, item.id); });
-  qi.addEventListener('keydown', function(e){
-    if(e.key==='Enter'){this.blur();e.preventDefault();}
-    if(e.key==='Escape'){this.value=item.qty!==null?item.qty:'?';this.blur();}
+  const tdQ=document.createElement('td');tdQ.className='qty';
+  const qi=document.createElement('input');qi.className='qty-input'+(item.qty===null?' unknown':'');
+  qi.value=item.qty!==null?item.qty:'?';
+  qi.addEventListener('focus',function(){if(this.value==='?')this.value='';this.select();});
+  qi.addEventListener('blur',function(){
+    const raw=this.value.trim();let nq=raw===''||raw==='?'?null:Number(raw);
+    if(raw!==''&&raw!=='?'&&isNaN(nq)){this.value=item.qty!==null?item.qty:'?';return;}
+    if(nq===item.qty){if(item.qty===null)this.value='?';return;}
+    const old=item.qty;item.qty=nq;this.value=nq!==null?nq:'?';this.className='qty-input'+(nq===null?' unknown':'');
+    logChange(item.id,item.name,'qty',old,nq);
+    tr.classList.add('flash');setTimeout(()=>tr.classList.remove('flash'),600);
   });
+  qi.addEventListener('keydown',function(e){if(e.key==='Enter'){this.blur();e.preventDefault();}});
   tdQ.appendChild(qi);
 
-  // Description (read-only-ish notes)
-  const tdD = document.createElement('td');
-  tdD.className = 'notes-text';
-  tdD.textContent = item.notes || '';
+  const tdNo=document.createElement('td');
+  const ni=document.createElement('textarea');ni.className='note-input';ni.placeholder='Add a note...';
+  ni.value=item.note||'';ni.rows=1;
+  ni.addEventListener('input',function(){this.style.height='auto';this.style.height=Math.max(this.scrollHeight,28)+'px';});
+  ni.addEventListener('blur',function(){
+    const nv=this.value.trim();if(nv===(item.note||''))return;
+    const old=item.note;item.note=nv;logChange(item.id,item.name,'note',old,nv);
+  });
+  tdNo.appendChild(ni);
+  requestAnimationFrame(()=>{ni.style.height='auto';ni.style.height=Math.max(ni.scrollHeight,28)+'px';});
 
-  // Reviewer Notes (editable textarea)
-  const tdR = document.createElement('td');
-  const ra = document.createElement('textarea');
-  ra.className = 'edit-review';
-  ra.placeholder = 'Leave a note or correction\u2026';
-  ra.value = item.review || '';
-  ra.rows = 1;
-  ra.addEventListener('input', function(){ autoGrow(this); });
-  ra.addEventListener('blur', function(){ handleReviewChange(this, catId, item.id); });
-  tdR.appendChild(ra);
-
-  // Status
-  const tdS = document.createElement('td');
-  tdS.className = 'cell-status';
-  const pill = document.createElement('span');
-  const st = item.status || 'needs-review';
-  pill.className = `status-pill ${st}`;
-  pill.textContent = STATUS_LABELS[st] || st;
-  pill.title = 'Click to change status';
-  pill.addEventListener('click', function(){ handleStatusCycle(this, catId, item.id); });
-  tdS.appendChild(pill);
-
-  tr.append(tdN, tdE, tdQ, tdD, tdR, tdS);
-  requestAnimationFrame(() => autoGrow(ra));
-  return tr;
+  tr.append(tdN,tdD,tdQ,tdNo);return tr;
 }
 
-function autoGrow(el) {
-  el.style.height = 'auto';
-  el.style.height = Math.max(el.scrollHeight, 28) + 'px';
+function logChange(id,name,field,oldVal,newVal){
+  data.changelog.unshift({ts:new Date().toISOString(),who:userName||'Unknown',name,field,
+    oldVal:oldVal===null?null:String(oldVal),newVal:newVal===null?null:String(newVal)});
+  if(data.changelog.length>200)data.changelog.length=200;
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(()=>save(`${userName||'User'}: ${name} ${field} changed`),1500);
+  renderLog();
 }
 
-function renderLog() {
-  const wrap = document.getElementById('logWrap');
-  const countEl = document.getElementById('logCount');
-  const log = data.changelog || [];
-  countEl.textContent = log.length;
-  if (!log.length) { wrap.innerHTML = '<div class="log-list"><div class="log-empty">No changes yet. Edits will appear here with who changed what.</div></div>'; return; }
-  let html = '<div class="log-list">';
-  for (const e of log.slice(0, 50)) {
-    const icon = e.field==='qty'?'\uD83D\uDD38':e.field==='status'?'\uD83D\uDFE2':'\uD83D\uDCDD';
-    const diff = e.field==='qty'?
-      `<div class="diff"><span class="old">${e.oldVal??'?'}</span> \u2192 <span class="new">${e.newVal??'?'}</span></div>`:
-      e.field==='status'?
-      `<div class="diff">\u2192 ${STATUS_LABELS[e.newVal]||e.newVal}</div>`:
-      `<div class="diff" style="color:var(--text-2)">${e.newVal ? 'Note: "'+e.newVal.substring(0,60)+(e.newVal.length>60?'...':'')+'"' : 'Note cleared'}</div>`;
-    html += `<div class="log-item"><span class="log-icon">${icon}</span><div class="log-body"><strong>${e.itemName}</strong> ${diff}<div class="log-meta">${e.who} &middot; ${timeAgo(e.ts)}</div></div></div>`;
+function renderLog(){
+  const log=data.changelog||[];
+  document.getElementById('logCount').textContent=log.length;
+  const w=document.getElementById('logWrap');
+  if(!log.length){w.innerHTML='<div class="log-list" style="padding:14px;text-align:center;color:#484f58;font-size:.78rem">No changes yet.</div>';return;}
+  let h='<div class="log-list">';
+  for(const e of log.slice(0,40)){
+    const diff=e.field==='qty'?`<span class="old">${e.oldVal??'?'}</span> \u2192 <span class="new">${e.newVal??'?'}</span>`
+      :`note: "${(e.newVal||'').substring(0,50)}${(e.newVal||'').length>50?'...':''}"`;
+    h+=`<div class="log-item"><strong>${e.name}</strong> \u2014 ${diff}<br>${e.who}, ${timeAgo(e.ts)}</div>`;
   }
-  wrap.innerHTML = html + '</div>';
+  w.innerHTML=h+'</div>';
 }
 
-// Handlers
-function handleQtyChange(input, catId, itemId) {
-  const item = findItem(catId, itemId); if(!item) return;
-  let raw = input.value.trim();
-  let nq = raw===''||raw==='?' ? null : Number(raw);
-  if(raw!==''&&raw!=='?'&&isNaN(nq)){input.value=item.qty!==null?item.qty:'?';return;}
-  if(nq===item.qty){if(item.qty===null) input.value='?';return;}
-  const old = item.qty;
-  item.qty = nq;
-  input.value = nq !== null ? nq : '?';
-  input.className = 'edit-qty' + (nq===null?' empty':'');
-  recordChange(itemId, item.name, 'qty', old, nq);
-  flashRow(input);
-}
+function timeAgo(ts){const d=Date.now()-new Date(ts).getTime();
+  if(d<60000)return 'just now';if(d<3600000)return Math.floor(d/60000)+'m ago';
+  if(d<86400000)return Math.floor(d/3600000)+'h ago';return Math.floor(d/86400000)+'d ago';}
 
-function handleReviewChange(textarea, catId, itemId) {
-  const item = findItem(catId, itemId); if(!item) return;
-  const nv = textarea.value.trim();
-  if(nv === (item.review||'')) return;
-  const old = item.review;
-  item.review = nv;
-  recordChange(itemId, item.name, 'review', old, nv);
-}
+function toggleLog(){logOpen=!logOpen;document.getElementById('logWrap').style.display=logOpen?'block':'none';
+  document.getElementById('logArrow').innerHTML=logOpen?'&#9660;':'&#9654;';}
 
-function handleStatusCycle(pill, catId, itemId) {
-  const item = findItem(catId, itemId); if(!item) return;
-  const cur = item.status || 'needs-review';
-  const idx = STATUS_CYCLE.indexOf(cur);
-  const next = STATUS_CYCLE[(idx+1) % STATUS_CYCLE.length];
-  const old = item.status;
-  item.status = next;
-  pill.className = `status-pill ${next}`;
-  pill.textContent = STATUS_LABELS[next];
-  recordChange(itemId, item.name, 'status', old, next);
-  flashRow(pill);
-}
+function toast(msg){const b=document.getElementById('toasts'),el=document.createElement('div');
+  el.className='toast';el.textContent=msg;b.appendChild(el);
+  setTimeout(()=>{el.classList.add('out');setTimeout(()=>el.remove(),250);},4000);}
 
-function findItem(catId, itemId) {
-  const cat = data.categories.find(c => c.id === catId);
-  return cat?.items.find(i => i.id === itemId);
-}
-
-function flashRow(el) {
-  const tr = el.closest('tr');
-  if(tr){tr.classList.add('changed');setTimeout(()=>tr.classList.remove('changed'),700);}
-}
-
-// UI
-function toast(html, type='info') {
-  const box = document.getElementById('toasts');
-  const el = document.createElement('div');
-  el.className = `toast t-${type}`;
-  const icons = {info:'\u2139\uFE0F',success:'\u2705',warning:'\u26A0\uFE0F',change:'\uD83D\uDD38'};
-  el.innerHTML = `<span class="t-icon">${icons[type]||''}</span><span>${html}</span>`;
-  box.appendChild(el);
-  setTimeout(()=>{el.classList.add('out');setTimeout(()=>el.remove(),250);},5000);
-}
-
-function updateSyncBadge(state, text) {
-  const b = document.getElementById('syncBadge');
-  b.className = `sync-badge ${state}`;
-  b.querySelector('span').textContent = text;
-}
-
-function updateStatusBar() {
-  document.getElementById('statusUser').textContent = userName ? `\uD83D\uDC64 ${userName}` : '';
-  document.getElementById('statusSync').textContent = lastSyncTime ? `Last sync: ${timeAgo(lastSyncTime)}` : 'Connecting\u2026';
-  document.getElementById('statusSaved').textContent = data ? `${data.categories.reduce((s,c)=>s+c.items.length,0)} items` : '';
-}
-
-function timeAgo(ts) {
-  const ms = typeof ts==='number'?ts:new Date(ts).getTime();
-  const d = Date.now()-ms;
-  if(d<5000) return 'just now';
-  if(d<60000) return Math.floor(d/1000)+'s ago';
-  if(d<3600000) return Math.floor(d/60000)+'m ago';
-  if(d<86400000) return Math.floor(d/3600000)+'h ago';
-  return Math.floor(d/86400000)+'d ago';
-}
-
-function toggleLog() {
-  logOpen = !logOpen;
-  document.getElementById('logWrap').style.display = logOpen ? 'block' : 'none';
-  document.getElementById('logArrow').classList.toggle('open', logOpen);
-}
-
-function dismissHelp() {
-  document.getElementById('helpBanner').style.display = 'none';
-  localStorage.setItem('mkref_help_dismissed','1');
-}
-
-// Name
-function saveName() {
-  const n = document.getElementById('nameInput').value.trim();
-  if(!n) return;
-  userName = n;
-  localStorage.setItem('mkref_name', n);
-  document.getElementById('nameModal').classList.remove('open');
-  updateStatusBar();
-  toast(`Welcome, ${n}. Your changes will be tracked.`, 'success');
-}
-document.getElementById('nameInput').addEventListener('keydown', e => { if(e.key==='Enter') saveName(); });
+function saveName(){const n=document.getElementById('nameInput').value.trim();if(!n)return;
+  userName=n;localStorage.setItem('mkref_name',n);document.getElementById('nameModal').classList.remove('open');}
+document.getElementById('nameInput').addEventListener('keydown',e=>{if(e.key==='Enter')saveName();});
 </script>
 </body>
 </html>
