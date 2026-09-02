@@ -66,12 +66,20 @@
     {
       "id": "item_1788382055833",
       "name": "Hotel Key",
-      "desc": "handed cyl 30-120 - new system only",
+      "desc": "handed cyl 30-120 - new system only - dont add any keys to existing system unless its SKD or specified",
       "qty": 1,
       "note": "reach out to john to confirm"
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T20:49:54.978Z",
+      "who": "DUDE",
+      "name": "Hotel Key",
+      "field": "description changed",
+      "oldVal": "handed cyl 30-120 - new system only",
+      "newVal": "handed cyl 30-120 - new system only - dont add any keys to existing system unless its SKD or specified"
+    },
     {
       "ts": "2026-09-02T20:49:35.314Z",
       "who": "DUDE",
