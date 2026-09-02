@@ -19,7 +19,7 @@
       "name": "KA (Keyed Alike)",
       "id": "ka",
       "qty": 2,
-      "desc": "Multiple cylinders sharing the same key. Often specified per group."
+      "desc": "Multiple cylinders sharing the same key."
     },
     {
       "note": "",
@@ -86,6 +86,14 @@
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T20:38:59.764Z",
+      "who": "DUDE",
+      "name": "KA (Keyed Alike)",
+      "field": "description changed",
+      "oldVal": "Multiple cylinders sharing the same key. Often specified per group.",
+      "newVal": "Multiple cylinders sharing the same key."
+    },
     {
       "ts": "2026-09-02T20:38:47.293Z",
       "who": "DUDE",
