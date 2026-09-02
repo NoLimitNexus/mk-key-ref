@@ -68,10 +68,18 @@
       "name": "Hotel Key",
       "desc": "handed cyl 30-120",
       "qty": 1,
-      "note": ""
+      "note": "reach out to john to confirm"
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T20:48:50.919Z",
+      "who": "DUDE",
+      "name": "Hotel Key",
+      "field": "note",
+      "oldVal": "",
+      "newVal": "reach out to john to confirm"
+    },
     {
       "ts": "2026-09-02T20:48:38.595Z",
       "who": "DUDE",
