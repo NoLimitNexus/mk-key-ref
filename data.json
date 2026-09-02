@@ -15,7 +15,7 @@
       "desc": "same as change keys"
     },
     {
-      "note": "",
+      "note": "primus might change - will be called out on RPA",
       "name": "KA (Keyed Alike)",
       "id": "ka",
       "qty": 2,
@@ -79,6 +79,14 @@
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T20:42:06.346Z",
+      "who": "DUDE",
+      "name": "KA (Keyed Alike)",
+      "field": "note",
+      "oldVal": "",
+      "newVal": "primus might change - will be called out on RPA"
+    },
     {
       "ts": "2026-09-02T20:40:07.971Z",
       "who": "DUDE",
