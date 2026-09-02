@@ -65,13 +65,21 @@
     },
     {
       "id": "item_1788382055833",
-      "name": "",
+      "name": "Hotel Key",
       "desc": "",
       "qty": null,
       "note": ""
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T20:47:41.347Z",
+      "who": "DUDE",
+      "name": "Row",
+      "field": "renamed",
+      "oldVal": "",
+      "newVal": "Hotel Key"
+    },
     {
       "ts": "2026-09-02T20:47:35.839Z",
       "who": "DUDE",
