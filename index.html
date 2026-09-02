@@ -32,12 +32,7 @@ header{border-bottom:1px solid var(--border);padding:20px 0 16px}
 .hdr-left h1{font-size:1.25rem;font-weight:600;letter-spacing:-.01em}
 .hdr-left h1 span{color:var(--amber);margin-right:6px}
 .hdr-left p{font-size:.8rem;color:var(--text-2);margin-top:2px}
-.hdr-right{display:flex;align-items:center;gap:10px}
-.sync-badge{font-size:.75rem;padding:3px 10px;border-radius:12px;display:flex;align-items:center;gap:5px;border:1px solid var(--border)}
-.sync-badge.ok{color:var(--green);border-color:rgba(63,185,80,.3)}
-.sync-badge.off{color:var(--text-3)}
-.sync-badge.working{color:var(--amber);border-color:rgba(210,153,34,.3)}
-.sync-dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+
 
 /* Instructions banner */
 .instructions{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin:20px 0;font-size:.82rem;color:var(--text-2);line-height:1.6}
@@ -133,9 +128,7 @@ td.cell-status{text-align:center}
 .modal .btn{margin-top:14px;padding:7px 24px;border-radius:var(--radius);font-size:.835rem;font-family:var(--font);font-weight:500;cursor:pointer;background:var(--amber);color:var(--bg);border:none;transition:filter .1s}
 .modal .btn:hover{filter:brightness(1.1)}
 
-/* Status bar */
-.status-bar{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);padding:4px 24px;display:flex;align-items:center;justify-content:space-between;font-size:.7rem;color:var(--text-3);z-index:100}
-.status-bar .left,.status-bar .right{display:flex;align-items:center;gap:12px}
+
 
 @media(max-width:768px){
   .shell{padding:0 12px}
@@ -163,9 +156,6 @@ td.cell-status{text-align:center}
         <h1><span>&#9670;</span>Key Qty Reference</h1>
         <p>Default key quantities by product type &mdash; Schlage / Allegion</p>
       </div>
-      <div class="hdr-right">
-        <div class="sync-badge off" id="syncBadge"><div class="sync-dot"></div><span>Connecting&hellip;</span></div>
-      </div>
     </div>
   </header>
 
@@ -191,15 +181,7 @@ td.cell-status{text-align:center}
   </div>
 </div>
 
-<div class="status-bar">
-  <div class="left">
-    <span id="statusUser">--</span>
-    <span id="statusSync">Connecting&hellip;</span>
-  </div>
-  <div class="right">
-    <span id="statusSaved">--</span>
-  </div>
-</div>
+
 
 <script>
 const REPO = 'NoLimitNexus/mk-key-ref';
