@@ -43,7 +43,7 @@
       "desc": "Cross-keyed cylinder that also has its own change key symbol."
     },
     {
-      "note": "",
+      "note": "only valid on MK and primus product must be one or the either",
       "name": "LKB (Less Key Blank)",
       "id": "lkb",
       "qty": 0,
@@ -72,6 +72,14 @@
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T20:43:02.934Z",
+      "who": "DUDE",
+      "name": "LKB (Less Key Blank)",
+      "field": "note",
+      "oldVal": "",
+      "newVal": "only valid on MK and primus product must be one or the either"
+    },
     {
       "ts": "2026-09-02T20:42:29.196Z",
       "who": "DUDE",
