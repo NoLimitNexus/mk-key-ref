@@ -62,9 +62,24 @@
       "id": "control",
       "qty": 1,
       "desc": "always include 1 control key with new interchangeable core systems (5/6pin FSIC/LFIC or 7 pin) or new SKDs in an FSIC system"
+    },
+    {
+      "id": "item_1788382055833",
+      "name": "",
+      "desc": "",
+      "qty": null,
+      "note": ""
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T20:47:35.839Z",
+      "who": "DUDE",
+      "name": "New Row",
+      "field": "added",
+      "oldVal": null,
+      "newVal": null
+    },
     {
       "ts": "2026-09-02T20:46:51.070Z",
       "who": "DUDE",
