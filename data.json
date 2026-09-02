@@ -61,10 +61,18 @@
       "name": "Control Key",
       "id": "control",
       "qty": 1,
-      "desc": "always include 1 control key with new interchangeable core systems"
+      "desc": "always include 1 control key with new interchangeable core systems (5/6pin FSIC/LFIC or 7 pin)"
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T20:46:23.869Z",
+      "who": "DUDE",
+      "name": "Control Key",
+      "field": "description changed",
+      "oldVal": "always include 1 control key with new interchangeable core systems",
+      "newVal": "always include 1 control key with new interchangeable core systems (5/6pin FSIC/LFIC or 7 pin)"
+    },
     {
       "ts": "2026-09-02T20:45:41.476Z",
       "who": "DUDE",
