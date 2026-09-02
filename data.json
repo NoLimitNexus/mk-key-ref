@@ -60,7 +60,7 @@
       "note": "",
       "name": "Zero/One Bitted",
       "id": "zero_bit",
-      "qty": 0,
+      "qty": 2,
       "desc": "Cylinder shipped with all pins at zero. No operating key, used for temporary or field re-key."
     },
     {
@@ -72,6 +72,14 @@
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T20:44:31.350Z",
+      "who": "DUDE",
+      "name": "Zero/One Bitted",
+      "field": "qty",
+      "oldVal": "0",
+      "newVal": "2"
+    },
     {
       "ts": "2026-09-02T20:44:24.062Z",
       "who": "DUDE",
