@@ -12,7 +12,7 @@
       "name": "SKD (Single Keyed Different)",
       "id": "skd",
       "qty": 2,
-      "desc": ""
+      "desc": "same as change keys"
     },
     {
       "note": "",
@@ -86,6 +86,14 @@
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T20:39:03.646Z",
+      "who": "DUDE",
+      "name": "SKD (Single Keyed Different)",
+      "field": "description changed",
+      "oldVal": "",
+      "newVal": "same as change keys"
+    },
     {
       "ts": "2026-09-02T20:38:59.764Z",
       "who": "DUDE",
