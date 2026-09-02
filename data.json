@@ -51,7 +51,7 @@
     },
     {
       "note": "",
-      "name": "X-Prefix + Symbol (e.g. XLA12)",
+      "name": "X-Prefix + Symbol \n(e.g. XLA12)",
       "id": "x_prefix",
       "qty": 2,
       "desc": "Pinning is same as the base symbol. The X just documents the cross-keying. Keys are included."
@@ -86,6 +86,14 @@
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T15:15:32.858Z",
+      "who": "Josh",
+      "name": "X-Prefix + Symbol (e.g. XLA12)",
+      "field": "renamed",
+      "oldVal": "X-Prefix + Symbol (e.g. XLA12)",
+      "newVal": "X-Prefix + Symbol \n(e.g. XLA12)"
+    },
     {
       "ts": "2026-09-02T15:15:15.227Z",
       "who": "Josh",
