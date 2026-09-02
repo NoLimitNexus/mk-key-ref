@@ -66,12 +66,20 @@
     {
       "id": "item_1788382055833",
       "name": "Hotel Key",
-      "desc": "",
+      "desc": "handed cyl 30-120",
       "qty": null,
       "note": ""
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T20:48:36.657Z",
+      "who": "DUDE",
+      "name": "Hotel Key",
+      "field": "description changed",
+      "oldVal": "",
+      "newVal": "handed cyl 30-120"
+    },
     {
       "ts": "2026-09-02T20:47:41.347Z",
       "who": "DUDE",
