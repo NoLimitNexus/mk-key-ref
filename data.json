@@ -30,17 +30,17 @@
     },
     {
       "note": "",
-      "name": "Sub-Master Cylinder",
-      "id": "submaster",
-      "qty": 0,
-      "desc": "Cylinder keyed under a sub-master."
-    },
-    {
-      "note": "",
       "name": "Grand Master Cylinder",
       "id": "gm",
       "qty": 0,
       "desc": "Cylinder keyed under the grand master."
+    },
+    {
+      "note": "",
+      "name": "GGM / TMK Cylinder",
+      "id": "ggm",
+      "qty": 0,
+      "desc": "Top-level master cylinder. Keys ordered on a separate cut key line."
     },
     {
       "note": "",
@@ -129,9 +129,9 @@
   ],
   "changelog": [
     {
-      "ts": "2026-09-02T14:42:54.694Z",
+      "ts": "2026-09-02T14:42:59.950Z",
       "who": "Josh",
-      "name": "GGM / TMK Cylinder",
+      "name": "Sub-Master Cylinder",
       "field": "deleted",
       "oldVal": null,
       "newVal": null
