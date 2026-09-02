@@ -1,0 +1,280 @@
+{
+  "v": 1,
+  "categories": [
+    {
+      "id": "cylinders",
+      "name": "Cylinders / Cores",
+      "sub": "Keys Each values used in OET for cylinder & core line items",
+      "items": [
+        {
+          "id": "ck",
+          "name": "Change Key (CK)",
+          "ex": "AA1, LB3, MC7",
+          "qty": 2,
+          "notes": "Standard default. 2 cut keys ship with each cylinder.",
+          "review": "test",
+          "status": "confirmed"
+        },
+        {
+          "id": "skd",
+          "name": "SKD (Single Keyed Different)",
+          "ex": "",
+          "qty": 2,
+          "notes": "Gets its own unique change key. Same default as CK.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "nmk",
+          "name": "NMK (Not Master Keyed)",
+          "ex": "",
+          "qty": 2,
+          "notes": "Keyed to specific symbol but excluded from master hierarchy.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "mk_cyl",
+          "name": "Master Key Cylinder",
+          "ex": "AA, MB, L",
+          "qty": 0,
+          "notes": "Ships with 0 keys. Masters ordered on separate cut key line.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "gm_cyl",
+          "name": "Grand Master Cylinder",
+          "ex": "",
+          "qty": 0,
+          "notes": "Same as master — keys ordered separately.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "ggm_cyl",
+          "name": "GGM / TMK Cylinder",
+          "ex": "",
+          "qty": 0,
+          "notes": "Keys ordered separately.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "sel_cyl",
+          "name": "Selective Master Cylinder",
+          "ex": "ENG, HKP",
+          "qty": 0,
+          "notes": "Keys ordered separately.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "x13x",
+          "name": "X13X Cross-Keyed (no own key)",
+          "ex": "X13X, X1X",
+          "qty": 0,
+          "notes": "No key symbol of its own → no keys to ship.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "xaa1",
+          "name": "XAA1 Cross-Keyed (HAS own key)",
+          "ex": "XAC11",
+          "qty": 2,
+          "notes": "Has own change key symbol → gets keys for that symbol.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "xla12",
+          "name": "X-Prefix + Symbol",
+          "ex": "XLA12, XMB3",
+          "qty": 2,
+          "notes": "Pinning identical to base symbol. X documents cross-keying. Keys included.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "ka",
+          "name": "KA (Keyed Alike)",
+          "ex": "",
+          "qty": 2,
+          "notes": "2 per cylinder default. Customer often specifies total per group.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "lkb",
+          "name": "LKB (Less Key Blank)",
+          "ex": "",
+          "qty": 0,
+          "notes": "Explicitly no keys ship. Cylinder pinned but no physical keys.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "const_core",
+          "name": "Construction Key (CK Split Key)",
+          "ex": "",
+          "qty": 0,
+          "notes": "Furnished WITHOUT keys. Must add operating + control key manually.",
+          "review": "",
+          "status": "needs-review"
+        }
+      ]
+    },
+    {
+      "id": "cut_keys",
+      "name": "Cut Key Line Items",
+      "sub": "Quantities per symbol when ordering keys on a separate line",
+      "items": [
+        {
+          "id": "mk_cut",
+          "name": "Master Key",
+          "ex": "48-xxx",
+          "qty": 2,
+          "notes": "Believed to be 2 per symbol.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "gm_cut",
+          "name": "Grand Master Key",
+          "ex": "",
+          "qty": 2,
+          "notes": "Needs verification.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "ggm_cut",
+          "name": "GGM / TMK",
+          "ex": "",
+          "qty": 2,
+          "notes": "Needs verification.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "sel_cut",
+          "name": "Selective Master",
+          "ex": "",
+          "qty": 2,
+          "notes": "Needs verification.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "ctrl_fsic",
+          "name": "Control Key (FSIC/SFIC)",
+          "ex": "",
+          "qty": 1,
+          "notes": "Believed 1 per system, not per cylinder.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "ctrl_7pin",
+          "name": "Control Key (7-pin)",
+          "ex": "CONL",
+          "qty": 1,
+          "notes": "Same question as standard control.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "const_op",
+          "name": "Construction Operating Key",
+          "ex": "",
+          "qty": 1,
+          "notes": "Must be manually added.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "const_ctrl",
+          "name": "Construction Control Key",
+          "ex": "",
+          "qty": 1,
+          "notes": "Must be manually added.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "emergency",
+          "name": "Emergency Key",
+          "ex": "85/86 function",
+          "qty": null,
+          "notes": "Need to determine standard default.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "submaster_cut",
+          "name": "Sub-Master Key",
+          "ex": "AAA, AAB",
+          "qty": 2,
+          "notes": "Needs verification.",
+          "review": "",
+          "status": "needs-review"
+        }
+      ]
+    },
+    {
+      "id": "special",
+      "name": "Special Products",
+      "sub": "Variable or order-specific quantities",
+      "items": [
+        {
+          "id": "blanks",
+          "name": "Key Blanks (uncut)",
+          "ex": "",
+          "qty": null,
+          "notes": "No standard default — qty per customer order.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "extra_cut",
+          "name": "Extra Cut Keys",
+          "ex": "50-214, 50-232",
+          "qty": null,
+          "notes": "Debit/credit balance items.",
+          "review": "",
+          "status": "needs-review"
+        },
+        {
+          "id": "pki",
+          "name": "PKI (Pack Keys Independently)",
+          "ex": "60-001",
+          "qty": null,
+          "notes": "Service charge, not a key quantity.",
+          "review": "",
+          "status": "needs-review"
+        }
+      ]
+    }
+  ],
+  "changelog": [
+    {
+      "ts": "2026-09-02T12:28:32.594Z",
+      "who": "Josh",
+      "itemId": "ck",
+      "itemName": "Change Key (CK)",
+      "field": "status",
+      "oldVal": "needs-review",
+      "newVal": "confirmed"
+    },
+    {
+      "ts": "2026-09-02T12:28:32.506Z",
+      "who": "Josh",
+      "itemId": "ck",
+      "itemName": "Change Key (CK)",
+      "field": "review",
+      "oldVal": "",
+      "newVal": "test"
+    }
+  ]
+}
