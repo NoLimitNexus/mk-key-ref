@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Key Qty Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1117;--surface:#161b22;--surface-hover:#1c2129;
+  --border:#30363d;--border-light:#484f58;
+  --text:#e6edf3;--text-2:#7d8590;--text-3:#484f58;
+  --amber:#d29922;--amber-dim:rgba(210,153,34,.12);
+  --green:#3fb950;--green-dim:rgba(63,185,80,.12);
+  --red:#f85149;--red-dim:rgba(248,81,73,.12);
+  --blue:#58a6ff;--blue-dim:rgba(88,166,255,.12);
+  --radius:6px;--font:'Inter',system-ui,-apple-system,sans-serif;
+}
+html{font-size:14px;scrollbar-color:var(--border) var(--bg)}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh}
+::selection{background:var(--amber);color:var(--bg)}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--border-light)}
+
+/* Layout */
+.shell{max-width:1100px;margin:0 auto;padding:0 24px}
+header{border-bottom:1px solid var(--border);padding:20px 0 16px}
+.hdr-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.hdr-left h1{font-size:1.25rem;font-weight:600;letter-spacing:-.01em}
+.hdr-left h1 span{color:var(--amber);margin-right:6px}
+.hdr-left p{font-size:.8rem;color:var(--text-2);margin-top:2px}
+.hdr-right{display:flex;align-items:center;gap:10px}
+.sync-badge{font-size:.75rem;padding:3px 10px;border-radius:12px;display:flex;align-items:center;gap:5px;border:1px solid var(--border)}
+.sync-badge.ok{color:var(--green);border-color:rgba(63,185,80,.3)}
+.sync-badge.off{color:var(--text-3);border-color:var(--border)}
+.sync-badge.working{color:var(--amber);border-color:rgba(210,153,34,.3)}
+.sync-dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+.btn-icon{background:none;border:1px solid var(--border);color:var(--text-2);width:32px;height:32px;border-radius:var(--radius);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .1s}
+.btn-icon:hover{background:var(--surface);color:var(--text);border-color:var(--border-light)}
+
+/* Sections */
+main{padding:24px 0 80px}
+.section{margin-bottom:32px}
+.section-hdr{margin-bottom:10px}
+.section-hdr h2{font-size:.95rem;font-weight:600;color:var(--text);display:flex;align-items:center;gap:8px}
+.section-hdr h2 .tag{font-size:.65rem;font-weight:500;color:var(--amber);background:var(--amber-dim);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.03em}
+.section-hdr p{font-size:.78rem;color:var(--text-2);margin-top:2px}
+
+/* Table */
+.tbl-wrap{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+th{text-align:left;font-size:.7rem;font-weight:600;color:var(--text-2);text-transform:uppercase;letter-spacing:.05em;padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--border);white-space:nowrap}
+th.c-qty{width:72px;text-align:center}
+th.c-verified{width:64px;text-align:center}
+th.c-examples{width:160px}
+th.c-notes{min-width:200px}
+td{padding:7px 12px;border-bottom:1px solid var(--border);vertical-align:top;font-size:.835rem}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--surface-hover)}
+tr.changed td{animation:flash .6s ease}
+@keyframes flash{0%{background:var(--amber-dim)}100%{background:transparent}}
+td.cell-name{font-weight:500;color:var(--text)}
+td.cell-ex{color:var(--text-2);font-size:.78rem;font-family:'SF Mono','Cascadia Code',Consolas,monospace}
+td.cell-qty{text-align:center}
+td.cell-verified{text-align:center}
+
+/* Editable fields */
+.edit-qty{width:44px;background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:4px;padding:3px 4px;text-align:center;font-size:.835rem;font-family:var(--font);transition:border-color .1s}
+.edit-qty:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 2px var(--amber-dim)}
+.edit-qty.empty{color:var(--text-3);font-style:italic}
+.edit-notes{width:100%;background:transparent;border:none;color:var(--text-2);font-size:.78rem;font-family:var(--font);padding:2px 0;resize:none;line-height:1.4}
+.edit-notes:focus{outline:none;color:var(--text)}
+.edit-notes::placeholder{color:var(--text-3)}
+.cb-verified{accent-color:var(--green);width:15px;height:15px;cursor:pointer}
+.prev-val{font-size:.65rem;color:var(--text-3);text-decoration:line-through;margin-right:4px}
+
+/* Activity log */
+.activity{margin-top:8px}
+.activity-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;cursor:pointer;user-select:none}
+.activity-hdr h2{font-size:.9rem;font-weight:600;display:flex;align-items:center;gap:6px}
+.activity-hdr .count{font-size:.7rem;background:var(--surface);color:var(--text-2);padding:1px 7px;border-radius:10px;border:1px solid var(--border)}
+.activity-hdr .arrow{color:var(--text-3);transition:transform .2s;font-size:.75rem}
+.activity-hdr .arrow.open{transform:rotate(90deg)}
+.log-list{max-height:320px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}
+.log-item{padding:8px 14px;border-bottom:1px solid var(--border);font-size:.78rem;display:flex;gap:10px;align-items:flex-start}
+.log-item:last-child{border-bottom:none}
+.log-icon{flex-shrink:0;margin-top:2px}
+.log-body{flex:1;min-width:0}
+.log-body strong{color:var(--text);font-weight:500}
+.log-body .diff{margin-top:2px}
+.log-body .old{color:var(--red);text-decoration:line-through}
+.log-body .new{color:var(--green)}
+.log-meta{color:var(--text-3);font-size:.7rem;margin-top:1px}
+.log-empty{padding:20px;text-align:center;color:var(--text-3);font-size:.8rem}
+
+/* Toasts */
+.toast-box{position:fixed;top:16px;right:16px;z-index:999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast{pointer-events:auto;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:10px 16px;font-size:.8rem;color:var(--text);box-shadow:0 4px 24px rgba(0,0,0,.4);display:flex;align-items:center;gap:8px;animation:slideIn .2s ease;max-width:360px}
+.toast.out{animation:slideOut .2s ease forwards}
+@keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes slideOut{from{transform:translateX(0);opacity:1}to{transform:translateX(100%);opacity:0}}
+.toast .t-icon{flex-shrink:0}
+.toast.t-info{border-left:3px solid var(--blue)}
+.toast.t-success{border-left:3px solid var(--green)}
+.toast.t-warning{border-left:3px solid var(--amber)}
+.toast.t-change{border-left:3px solid var(--amber)}
+
+/* Modal */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:900;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .15s}
+.modal-bg.open{opacity:1;pointer-events:auto}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:8px;width:420px;max-width:90vw;padding:24px}
+.modal h3{font-size:1rem;font-weight:600;margin-bottom:4px}
+.modal p.sub{font-size:.78rem;color:var(--text-2);margin-bottom:16px}
+.modal label{display:block;font-size:.78rem;font-weight:500;color:var(--text-2);margin-bottom:4px;margin-top:12px}
+.modal input[type=text],.modal input[type=password]{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:4px;padding:7px 10px;font-size:.835rem;font-family:var(--font)}
+.modal input:focus{outline:none;border-color:var(--amber)}
+.modal-actions{display:flex;gap:8px;margin-top:20px;justify-content:flex-end}
+.btn{padding:6px 16px;border-radius:var(--radius);font-size:.8rem;font-family:var(--font);font-weight:500;cursor:pointer;border:1px solid var(--border);transition:all .1s}
+.btn-primary{background:var(--amber);color:var(--bg);border-color:var(--amber)}
+.btn-primary:hover{filter:brightness(1.1)}
+.btn-ghost{background:transparent;color:var(--text-2)}
+.btn-ghost:hover{color:var(--text);background:var(--surface-hover)}
+.btn-sm{padding:4px 10px;font-size:.75rem}
+
+/* Name prompt */
+.name-prompt{text-align:center}
+.name-prompt h3{margin-bottom:12px}
+.name-prompt input{text-align:center;max-width:240px;margin:0 auto;display:block}
+.name-prompt .btn{margin-top:16px}
+
+/* Status bar */
+.status-bar{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);padding:4px 24px;display:flex;align-items:center;justify-content:space-between;font-size:.7rem;color:var(--text-3);z-index:100}
+.status-bar .left,.status-bar .right{display:flex;align-items:center;gap:12px}
+
+/* Responsive */
+@media(max-width:768px){
+  .shell{padding:0 12px}
+  th.c-examples{display:none}td.cell-ex{display:none}
+  th.c-notes{min-width:120px}
+}
+</style>
+</head>
+<body>
+
+<div class="toast-box" id="toasts"></div>
+
+<!-- Name Prompt Modal -->
+<div class="modal-bg" id="nameModal">
+  <div class="modal name-prompt">
+    <h3>Who's viewing?</h3>
+    <p class="sub">Your name will appear on changes you make.</p>
+    <input type="text" id="nameInput" placeholder="e.g. John" maxlength="30" autofocus>
+    <button class="btn btn-primary" onclick="saveName()">Continue</button>
+  </div>
+</div>
+
+<!-- Settings Modal -->
+<div class="modal-bg" id="settingsModal">
+  <div class="modal">
+    <h3>Sync Settings</h3>
+    <p class="sub">Connect to GitHub to sync changes across devices in real-time.</p>
+    <label>Your Name</label>
+    <input type="text" id="sName" placeholder="Your name">
+    <label>GitHub Personal Access Token</label>
+    <input type="password" id="sToken" placeholder="ghp_xxxxxxxxxxxx">
+    <label>Repository</label>
+    <input type="text" id="sRepo" value="NoLimitNexus/mk-key-ref" readonly style="color:var(--text-3)">
+    <p class="sub" style="margin-top:12px;margin-bottom:0">Create a fine-grained PAT at <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" style="color:var(--blue)">github.com/settings/tokens</a> with <strong>Contents: Read & Write</strong> permission for this repo.</p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeSettings()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveSettings()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="shell">
+  <header>
+    <div class="hdr-row">
+      <div class="hdr-left">
+        <h1><span>&#9670;</span>Key Qty Reference</h1>
+        <p>Default key quantities by product type &mdash; Schlage / Allegion</p>
+      </div>
+      <div class="hdr-right">
+        <div class="sync-badge off" id="syncBadge"><div class="sync-dot"></div><span>Local only</span></div>
+        <button class="btn-icon" onclick="openSettings()" title="Sync settings">&#9881;</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main"></main>
+
+  <div class="activity" id="activitySection">
+    <div class="activity-hdr" onclick="toggleLog()">
+      <h2>Activity <span class="count" id="logCount">0</span></h2>
+      <span class="arrow" id="logArrow">&#9654;</span>
+    </div>
+    <div id="logWrap" style="display:none"></div>
+  </div>
+</div>
+
+<div class="status-bar">
+  <div class="left">
+    <span id="statusUser">--</span>
+    <span id="statusSync">Sync: off</span>
+  </div>
+  <div class="right">
+    <span id="statusSaved">--</span>
+  </div>
+</div>
+
+<script>
+// ============================================================
+//  CONFIG & DEFAULTS
+// ============================================================
+const REPO = 'NoLimitNexus/mk-key-ref';
+const DATA_PATH = 'data.json';
+
+const DEFAULT_DATA = {
+  v:1,
+  categories:[
+    {
+      id:'cylinders', name:'Cylinders / Cores',
+      sub:'Keys Each values used in OET for cylinder & core line items',
+      items:[
+        {id:'ck',name:'Change Key (CK)',ex:'AA1, LB3, MC7',qty:2,notes:'Standard default. 2 cut keys ship with each cylinder.',verified:false},
+        {id:'skd',name:'SKD (Single Keyed Different)',ex:'',qty:2,notes:'Gets its own unique change key. Same default as CK.',verified:false},
+        {id:'nmk',name:'NMK (Not Master Keyed)',ex:'',qty:2,notes:'Keyed to specific symbol but excluded from master hierarchy.',verified:false},
+        {id:'mk_cyl',name:'Master Key Cylinder',ex:'AA, MB, L',qty:0,notes:'Ships with 0 keys. Masters ordered on separate cut key line.',verified:false},
+        {id:'gm_cyl',name:'Grand Master Cylinder',ex:'',qty:0,notes:'Same as master \u2014 keys ordered separately.',verified:false},
+        {id:'ggm_cyl',name:'GGM / TMK Cylinder',ex:'',qty:0,notes:'Keys ordered separately.',verified:false},
+        {id:'sel_cyl',name:'Selective Master Cylinder',ex:'ENG, HKP',qty:0,notes:'Keys ordered separately.',verified:false},
+        {id:'x13x',name:'X13X Cross-Keyed (no own key)',ex:'X13X, X1X, X2X',qty:0,notes:'No key symbol of its own \u2192 no keys to ship.',verified:false},
+        {id:'xaa1',name:'XAA1 Cross-Keyed (HAS own key)',ex:'XAC11, X7AA',qty:2,notes:'Has own change key symbol \u2192 gets keys for that symbol.',verified:false},
+        {id:'xla12',name:'X-Prefix + Symbol',ex:'XLA12, XMB3',qty:2,notes:'Pinning identical to base symbol. X documents cross-keying. Keys ARE included.',verified:false},
+        {id:'ka',name:'KA (Keyed Alike)',ex:'',qty:2,notes:'2 per cylinder default. Customer often specifies total per group instead.',verified:false},
+        {id:'lkb',name:'LKB (Less Key Blank)',ex:'',qty:0,notes:'Explicitly no keys ship. Cylinder pinned to symbol, no physical keys.',verified:false},
+        {id:'const_core',name:'Construction Key (CK Split Key)',ex:'',qty:0,notes:'Furnished WITHOUT keys. Must add 1\u00d7 operating + 1\u00d7 control key manually.',verified:false},
+      ]
+    },
+    {
+      id:'cut_keys', name:'Cut Key Line Items',
+      sub:'Quantities per symbol when ordering keys on a separate line',
+      items:[
+        {id:'mk_cut',name:'Master Key',ex:'48-xxx cut key line',qty:2,notes:'Believed to be 2 per symbol \u2014 needs verification.',verified:false},
+        {id:'gm_cut',name:'Grand Master Key',ex:'',qty:2,notes:'Needs verification.',verified:false},
+        {id:'ggm_cut',name:'GGM / TMK',ex:'',qty:2,notes:'Needs verification.',verified:false},
+        {id:'sel_cut',name:'Selective Master',ex:'',qty:2,notes:'Needs verification.',verified:false},
+        {id:'ctrl_fsic',name:'Control Key (FSIC/SFIC)',ex:'',qty:1,notes:'Believed 1 per system, not per cylinder. Verify.',verified:false},
+        {id:'ctrl_7pin',name:'Control Key (7-pin)',ex:'Set list = CONL',qty:1,notes:'Same qty question as standard control.',verified:false},
+        {id:'const_op',name:'Construction Operating Key',ex:'',qty:1,notes:'Must be manually added \u2014 not included by default.',verified:false},
+        {id:'const_ctrl',name:'Construction Control Key',ex:'',qty:1,notes:'Must be manually added \u2014 not included by default.',verified:false},
+        {id:'emergency',name:'Emergency Key',ex:'85/86 function locks',qty:null,notes:'Need to determine standard default.',verified:false},
+        {id:'submaster_cut',name:'Sub-Master Key',ex:'AAA, AAB',qty:2,notes:'Needs verification.',verified:false},
+      ]
+    },
+    {
+      id:'special', name:'Special Products',
+      sub:'Variable or order-specific quantities',
+      items:[
+        {id:'blanks',name:'Key Blanks (uncut)',ex:'',qty:null,notes:'No standard default \u2014 quantity per customer order.',verified:false},
+        {id:'extra_cut',name:'Extra Cut Keys',ex:'50-214, 50-215, 50-232',qty:null,notes:'Debit/credit balance items \u2014 qty per customer order.',verified:false},
+        {id:'pki',name:'PKI (Pack Keys Independently)',ex:'60-001, 60-601',qty:null,notes:'Service charge, not a key quantity.',verified:false},
+      ]
+    }
+  ],
+  changelog:[]
+};
+
+// ============================================================
+//  STATE
+// ============================================================
+let data = null;
+let userName = localStorage.getItem('mkref_name') || '';
+let ghToken = localStorage.getItem('mkref_token') || '';
+let remoteSha = null;
+let pollTimer = null;
+let saveDebounce = null;
+let logOpen = false;
+let lastSyncTime = null;
+let pendingChanges = false;
+
+// ============================================================
+//  INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', async () => {
+  // Try loading from remote first, then local, then defaults
+  data = await loadData();
+  renderAll();
+  updateStatusBar();
+
+  if (!userName) {
+    document.getElementById('nameModal').classList.add('open');
+    document.getElementById('nameInput').focus();
+  }
+
+  // Start polling if token is configured
+  if (ghToken) startPolling();
+});
+
+async function loadData() {
+  // Try remote first
+  if (ghToken) {
+    try {
+      const d = await ghFetch();
+      if (d) { localStorage.setItem('mkref_data', JSON.stringify(d)); return d; }
+    } catch(e) { console.warn('Remote fetch failed:', e); }
+  }
+  // Fall back to local
+  const local = localStorage.getItem('mkref_data');
+  if (local) {
+    try { return JSON.parse(local); } catch(e) {}
+  }
+  // Defaults
+  return JSON.parse(JSON.stringify(DEFAULT_DATA));
+}
+
+// ============================================================
+//  GITHUB API
+// ============================================================
+async function ghFetch() {
+  const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`, {
+    headers: {'Authorization': `Bearer ${ghToken}`, 'Accept': 'application/vnd.github.v3+json'}
+  });
+  if (!r.ok) return null;
+  const j = await r.json();
+  remoteSha = j.sha;
+  return JSON.parse(atob(j.content));
+}
+
+async function ghSave(msg) {
+  if (!ghToken) return false;
+  // Get current SHA first
+  try {
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`, {
+      headers: {'Authorization': `Bearer ${ghToken}`, 'Accept': 'application/vnd.github.v3+json'}
+    });
+    if (r.ok) { remoteSha = (await r.json()).sha; }
+  } catch(e) {}
+
+  const body = {
+    message: msg || 'Update key quantities',
+    content: btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2)))),
+    sha: remoteSha
+  };
+  const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`, {
+    method: 'PUT',
+    headers: {'Authorization': `Bearer ${ghToken}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json'},
+    body: JSON.stringify(body)
+  });
+  if (r.ok) {
+    const j = await r.json();
+    remoteSha = j.content.sha;
+    lastSyncTime = Date.now();
+    return true;
+  }
+  console.error('GitHub save failed:', r.status);
+  return false;
+}
+
+// ============================================================
+//  POLLING
+// ============================================================
+function startPolling() {
+  if (pollTimer) clearInterval(pollTimer);
+  pollTimer = setInterval(pollForChanges, 10000);
+  updateSyncBadge('ok', 'Synced');
+}
+
+async function pollForChanges() {
+  if (!ghToken) return;
+  try {
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`, {
+      headers: {'Authorization': `Bearer ${ghToken}`, 'Accept': 'application/vnd.github.v3+json'}
+    });
+    if (!r.ok) return;
+    const j = await r.json();
+    if (j.sha !== remoteSha) {
+      remoteSha = j.sha;
+      const remote = JSON.parse(atob(j.content));
+      mergeRemote(remote);
+    }
+    lastSyncTime = Date.now();
+    updateStatusBar();
+  } catch(e) { console.warn('Poll error:', e); }
+}
+
+function mergeRemote(remote) {
+  // Detect what changed
+  const diffs = [];
+  for (const rCat of remote.categories) {
+    const lCat = data.categories.find(c => c.id === rCat.id);
+    if (!lCat) continue;
+    for (const rItem of rCat.items) {
+      const lItem = lCat.items.find(i => i.id === rItem.id);
+      if (!lItem) continue;
+      if (rItem.qty !== lItem.qty) diffs.push({item: rItem.name, field:'qty', old: lItem.qty, new: rItem.qty});
+      if (rItem.notes !== lItem.notes) diffs.push({item: rItem.name, field:'notes', old: lItem.notes, new: rItem.notes});
+      if (rItem.verified !== lItem.verified) diffs.push({item: rItem.name, field:'verified', old: lItem.verified, new: rItem.verified});
+    }
+  }
+
+  if (diffs.length === 0) return;
+
+  // Apply remote data
+  data = remote;
+  localStorage.setItem('mkref_data', JSON.stringify(data));
+  renderAll();
+
+  // Notify
+  for (const d of diffs) {
+    const label = d.field === 'qty' ? `qty: ${d.old ?? '?'} \u2192 ${d.new ?? '?'}` :
+                  d.field === 'verified' ? (d.new ? 'marked verified \u2705' : 'unmarked verified') :
+                  'notes updated';
+    toast(`<strong>${d.item}</strong> \u2014 ${label}`, 'change');
+    // Flash the row
+    setTimeout(() => {
+      const row = document.querySelector(`tr[data-id="${diffs[0]?.item?.replace(/[^a-z0-9]/gi,'')}"]`);
+      if (row) row.classList.add('changed');
+    }, 100);
+  }
+}
+
+// ============================================================
+//  SAVE
+// ============================================================
+function saveLocal() {
+  localStorage.setItem('mkref_data', JSON.stringify(data));
+  updateStatusBar();
+}
+
+function scheduleSave(changeMsg) {
+  saveLocal();
+  if (!ghToken) return;
+  pendingChanges = true;
+  updateSyncBadge('working', 'Saving\u2026');
+  clearTimeout(saveDebounce);
+  saveDebounce = setTimeout(async () => {
+    const ok = await ghSave(changeMsg);
+    pendingChanges = false;
+    updateSyncBadge(ok ? 'ok' : 'off', ok ? 'Synced' : 'Sync error');
+    if (ok) updateStatusBar();
+  }, 1500);
+}
+
+// ============================================================
+//  CHANGE TRACKING
+// ============================================================
+function recordChange(itemId, itemName, field, oldVal, newVal) {
+  const entry = {
+    ts: new Date().toISOString(),
+    who: userName || 'Unknown',
+    itemId, itemName, field,
+    oldVal: oldVal === null ? null : String(oldVal),
+    newVal: newVal === null ? null : String(newVal)
+  };
+  data.changelog.unshift(entry);
+  if (data.changelog.length > 200) data.changelog.length = 200;
+
+  const msg = `${userName || 'User'}: ${itemName} ${field} ${oldVal ?? '?'} \u2192 ${newVal ?? '?'}`;
+  scheduleSave(msg);
+  renderLog();
+}
+
+// ============================================================
+//  RENDERING
+// ============================================================
+function renderAll() {
+  const main = document.getElementById('main');
+  main.innerHTML = '';
+  for (const cat of data.categories) {
+    main.appendChild(renderSection(cat));
+  }
+  renderLog();
+  updateStatusBar();
+}
+
+function renderSection(cat) {
+  const sec = document.createElement('div');
+  sec.className = 'section';
+  sec.innerHTML = `
+    <div class="section-hdr">
+      <h2>${cat.name} <span class="tag">${cat.items.length} items</span></h2>
+      <p>${cat.sub || ''}</p>
+    </div>`;
+
+  const wrap = document.createElement('div');
+  wrap.className = 'tbl-wrap';
+  const table = document.createElement('table');
+  table.innerHTML = `<thead><tr>
+    <th style="width:200px">Situation</th>
+    <th class="c-examples">Examples</th>
+    <th class="c-qty">Default</th>
+    <th class="c-notes">Notes</th>
+    <th class="c-verified">\u2713</th>
+  </tr></thead>`;
+
+  const tbody = document.createElement('tbody');
+  for (const item of cat.items) {
+    tbody.appendChild(renderRow(item, cat.id));
+  }
+  table.appendChild(tbody);
+  wrap.appendChild(table);
+  sec.appendChild(wrap);
+  return sec;
+}
+
+function renderRow(item, catId) {
+  const tr = document.createElement('tr');
+  tr.dataset.id = item.id;
+
+  // Name
+  const tdName = document.createElement('td');
+  tdName.className = 'cell-name';
+  tdName.textContent = item.name;
+
+  // Examples
+  const tdEx = document.createElement('td');
+  tdEx.className = 'cell-ex';
+  tdEx.textContent = item.ex || '\u2014';
+
+  // Qty
+  const tdQty = document.createElement('td');
+  tdQty.className = 'cell-qty';
+  const qtyInput = document.createElement('input');
+  qtyInput.type = 'text';
+  qtyInput.className = 'edit-qty' + (item.qty === null ? ' empty' : '');
+  qtyInput.value = item.qty !== null ? item.qty : '?';
+  qtyInput.setAttribute('data-cat', catId);
+  qtyInput.setAttribute('data-item', item.id);
+  qtyInput.addEventListener('focus', function() {
+    if (this.value === '?') this.value = '';
+    this.select();
+  });
+  qtyInput.addEventListener('blur', function() {
+    handleQtyChange(this, catId, item.id);
+  });
+  qtyInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') { this.blur(); e.preventDefault(); }
+    if (e.key === 'Escape') { this.value = item.qty !== null ? item.qty : '?'; this.blur(); }
+  });
+  tdQty.appendChild(qtyInput);
+
+  // Notes
+  const tdNotes = document.createElement('td');
+  const notesTA = document.createElement('textarea');
+  notesTA.className = 'edit-notes';
+  notesTA.placeholder = 'Add a note\u2026';
+  notesTA.value = item.notes || '';
+  notesTA.rows = 1;
+  notesTA.setAttribute('data-cat', catId);
+  notesTA.setAttribute('data-item', item.id);
+  notesTA.addEventListener('input', function() { autoGrow(this); });
+  notesTA.addEventListener('blur', function() {
+    handleNotesChange(this, catId, item.id);
+  });
+  tdNotes.appendChild(notesTA);
+
+  // Verified
+  const tdV = document.createElement('td');
+  tdV.className = 'cell-verified';
+  const cb = document.createElement('input');
+  cb.type = 'checkbox';
+  cb.className = 'cb-verified';
+  cb.checked = !!item.verified;
+  cb.title = item.verified ? 'Verified' : 'Not yet verified';
+  cb.addEventListener('change', function() {
+    handleVerifiedChange(this, catId, item.id);
+  });
+  tdV.appendChild(cb);
+
+  tr.append(tdName, tdEx, tdQty, tdNotes, tdV);
+
+  // Auto-grow notes on mount
+  requestAnimationFrame(() => autoGrow(notesTA));
+
+  return tr;
+}
+
+function autoGrow(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.max(el.scrollHeight, 22) + 'px';
+}
+
+function renderLog() {
+  const wrap = document.getElementById('logWrap');
+  const countEl = document.getElementById('logCount');
+  const log = data.changelog || [];
+  countEl.textContent = log.length;
+
+  if (log.length === 0) {
+    wrap.innerHTML = '<div class="log-list"><div class="log-empty">No changes recorded yet.</div></div>';
+    return;
+  }
+
+  let html = '<div class="log-list">';
+  for (const entry of log.slice(0, 50)) {
+    const icon = entry.field === 'qty' ? '\uD83D\uDD38' : entry.field === 'verified' ? '\u2705' : '\uD83D\uDCDD';
+    const diff = entry.field === 'qty' ?
+      `<div class="diff"><span class="old">${entry.oldVal ?? '?'}</span> \u2192 <span class="new">${entry.newVal ?? '?'}</span></div>` :
+      entry.field === 'verified' ?
+      `<div class="diff">${entry.newVal === 'true' ? 'Marked verified' : 'Unmarked'}</div>` :
+      `<div class="diff" style="color:var(--text-2)">Note updated</div>`;
+    html += `<div class="log-item">
+      <span class="log-icon">${icon}</span>
+      <div class="log-body">
+        <strong>${entry.itemName}</strong> ${diff}
+        <div class="log-meta">${entry.who} &middot; ${timeAgo(entry.ts)}</div>
+      </div>
+    </div>`;
+  }
+  html += '</div>';
+  wrap.innerHTML = html;
+}
+
+// ============================================================
+//  EVENT HANDLERS
+// ============================================================
+function handleQtyChange(input, catId, itemId) {
+  const cat = data.categories.find(c => c.id === catId);
+  const item = cat?.items.find(i => i.id === itemId);
+  if (!item) return;
+
+  let raw = input.value.trim();
+  let newQty = raw === '' || raw === '?' ? null : Number(raw);
+  if (raw !== '' && raw !== '?' && isNaN(newQty)) {
+    input.value = item.qty !== null ? item.qty : '?';
+    return;
+  }
+
+  if (newQty === item.qty) {
+    if (item.qty === null) input.value = '?';
+    return;
+  }
+
+  const oldQty = item.qty;
+  item.qty = newQty;
+  input.value = newQty !== null ? newQty : '?';
+  input.className = 'edit-qty' + (newQty === null ? ' empty' : '');
+  recordChange(itemId, item.name, 'qty', oldQty, newQty);
+
+  // Flash
+  input.closest('tr').classList.add('changed');
+  setTimeout(() => input.closest('tr').classList.remove('changed'), 700);
+}
+
+function handleNotesChange(textarea, catId, itemId) {
+  const cat = data.categories.find(c => c.id === catId);
+  const item = cat?.items.find(i => i.id === itemId);
+  if (!item) return;
+
+  const newNotes = textarea.value.trim();
+  if (newNotes === (item.notes || '')) return;
+
+  const old = item.notes;
+  item.notes = newNotes;
+  recordChange(itemId, item.name, 'notes', old, newNotes);
+}
+
+function handleVerifiedChange(checkbox, catId, itemId) {
+  const cat = data.categories.find(c => c.id === catId);
+  const item = cat?.items.find(i => i.id === itemId);
+  if (!item) return;
+
+  const old = item.verified;
+  item.verified = checkbox.checked;
+  checkbox.title = checkbox.checked ? 'Verified' : 'Not yet verified';
+  recordChange(itemId, item.name, 'verified', old, checkbox.checked);
+
+  checkbox.closest('tr').classList.add('changed');
+  setTimeout(() => checkbox.closest('tr').classList.remove('changed'), 700);
+}
+
+// ============================================================
+//  UI HELPERS
+// ============================================================
+function toast(html, type='info') {
+  const box = document.getElementById('toasts');
+  const el = document.createElement('div');
+  el.className = `toast t-${type}`;
+  const icons = {info:'\u2139\uFE0F', success:'\u2705', warning:'\u26A0\uFE0F', change:'\uD83D\uDD38'};
+  el.innerHTML = `<span class="t-icon">${icons[type]||''}</span><span>${html}</span>`;
+  box.appendChild(el);
+  setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 250); }, 5000);
+}
+
+function updateSyncBadge(state, text) {
+  const badge = document.getElementById('syncBadge');
+  badge.className = `sync-badge ${state}`;
+  badge.querySelector('span').textContent = text;
+}
+
+function updateStatusBar() {
+  document.getElementById('statusUser').textContent = userName ? `\uD83D\uDC64 ${userName}` : 'Not identified';
+  document.getElementById('statusSync').textContent = ghToken ? (lastSyncTime ? `Last sync: ${timeAgo(lastSyncTime)}` : 'Sync: connecting\u2026') : 'Sync: off';
+  document.getElementById('statusSaved').textContent = data ? `${countItems()} items` : '--';
+}
+
+function countItems() {
+  return data.categories.reduce((s,c) => s + c.items.length, 0);
+}
+
+function timeAgo(ts) {
+  const ms = typeof ts === 'number' ? ts : new Date(ts).getTime();
+  const diff = Date.now() - ms;
+  if (diff < 5000) return 'just now';
+  if (diff < 60000) return Math.floor(diff/1000) + 's ago';
+  if (diff < 3600000) return Math.floor(diff/60000) + 'm ago';
+  if (diff < 86400000) return Math.floor(diff/3600000) + 'h ago';
+  return Math.floor(diff/86400000) + 'd ago';
+}
+
+function toggleLog() {
+  logOpen = !logOpen;
+  document.getElementById('logWrap').style.display = logOpen ? 'block' : 'none';
+  document.getElementById('logArrow').classList.toggle('open', logOpen);
+}
+
+// ============================================================
+//  MODALS
+// ============================================================
+function saveName() {
+  const name = document.getElementById('nameInput').value.trim();
+  if (!name) return;
+  userName = name;
+  localStorage.setItem('mkref_name', name);
+  document.getElementById('nameModal').classList.remove('open');
+  updateStatusBar();
+  toast(`Welcome, ${name}`, 'success');
+}
+document.getElementById('nameInput').addEventListener('keydown', e => { if (e.key === 'Enter') saveName(); });
+
+function openSettings() {
+  document.getElementById('sName').value = userName;
+  document.getElementById('sToken').value = ghToken;
+  document.getElementById('settingsModal').classList.add('open');
+  document.getElementById('sName').focus();
+}
+
+function closeSettings() {
+  document.getElementById('settingsModal').classList.remove('open');
+}
+
+async function saveSettings() {
+  const name = document.getElementById('sName').value.trim();
+  const token = document.getElementById('sToken').value.trim();
+
+  if (name) { userName = name; localStorage.setItem('mkref_name', name); }
+
+  if (token && token !== ghToken) {
+    ghToken = token;
+    localStorage.setItem('mkref_token', token);
+
+    // Test connection + attempt initial push if data.json doesn't exist yet
+    updateSyncBadge('working', 'Connecting\u2026');
+    try {
+      const existing = await ghFetch();
+      if (existing) {
+        data = existing;
+        localStorage.setItem('mkref_data', JSON.stringify(data));
+        renderAll();
+        toast('Connected \u2014 loaded remote data', 'success');
+      } else {
+        // Push initial data
+        await ghSave('Initial data');
+        toast('Connected \u2014 pushed initial data', 'success');
+      }
+      startPolling();
+    } catch(e) {
+      toast('Connection failed \u2014 check your token', 'warning');
+      updateSyncBadge('off', 'Error');
+    }
+  } else if (!token) {
+    ghToken = '';
+    localStorage.removeItem('mkref_token');
+    if (pollTimer) clearInterval(pollTimer);
+    updateSyncBadge('off', 'Local only');
+  }
+
+  closeSettings();
+  updateStatusBar();
+}
+
+// Close modals on bg click
+document.getElementById('settingsModal').addEventListener('click', function(e) { if (e.target === this) closeSettings(); });
+</script>
+</body>
+</html>
