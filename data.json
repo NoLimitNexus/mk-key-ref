@@ -61,10 +61,18 @@
       "name": "Control Key",
       "id": "control",
       "qty": 1,
-      "desc": "always include 1 control key with new 7 pin systems"
+      "desc": "always include 1 control key with new interchangeable core systems"
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T20:45:41.476Z",
+      "who": "DUDE",
+      "name": "Control Key",
+      "field": "description changed",
+      "oldVal": "always include 1 control key with new 7 pin systems",
+      "newVal": "always include 1 control key with new interchangeable core systems"
+    },
     {
       "ts": "2026-09-02T20:45:22.148Z",
       "who": "DUDE",
