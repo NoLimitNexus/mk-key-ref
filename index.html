@@ -308,7 +308,7 @@ function renderLog(){
   document.getElementById('logCount').textContent=log.length;
   const w=document.getElementById('logWrap');
   if(!log.length){w.innerHTML='<div style="font-size:0.75rem; color:#d29922; padding-bottom:8px;">Visible only to Josh</div><div class="log-list" style="padding:14px;text-align:center;color:#484f58;font-size:.78rem">No changes yet.</div>';return;}
-  let h='<div style="font-size:0.75rem; color:#d29922; padding-bottom:8px;">Visible only to Josh</div><div class="log-list">';
+  let h='<div style="display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:#d29922; padding-bottom:8px;"><span>Visible only to Josh</span><button onclick="clearLog()" style="background:transparent;border:1px solid #d29922;color:#d29922;border-radius:4px;padding:2px 8px;cursor:pointer;font-size:0.7rem;transition:background 0.2s;" onmouseover="this.style.background=\'rgba(210,153,34,0.1)\'" onmouseout="this.style.background=\'transparent\'">Clear Log</button></div><div class="log-list">';
   for(const e of log.slice(0,40)){
     let diff='';
     if(e.field==='qty') diff=`<span class="old">${e.oldVal??'?'}</span> \u2192 <span class="new">${e.newVal??'?'}</span>`;
@@ -335,6 +335,15 @@ function renderLog(){
 function timeAgo(ts){const d=Date.now()-new Date(ts).getTime();
   if(d<60000)return 'just now';if(d<3600000)return Math.floor(d/60000)+'m ago';
   if(d<86400000)return Math.floor(d/3600000)+'h ago';return Math.floor(d/86400000)+'d ago';}
+
+function clearLog(){
+  if(confirm('Are you sure you want to clear the entire change history?')){
+    data.changelog = [];
+    clearTimeout(saveTimer);
+    save('Log cleared manually');
+    renderLog();
+  }
+}
 
 function toggleLog(){logOpen=!logOpen;document.getElementById('logWrap').style.display=logOpen?'block':'none';
   document.getElementById('logArrow').innerHTML=logOpen?'&#9660;':'&#9654;';}
