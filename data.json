@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "note": "",
+      "note": "some res product has 1 ea",
       "name": "Change Symbol",
       "id": "ck",
       "qty": 2,
@@ -86,6 +86,14 @@
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T20:38:34.677Z",
+      "who": "DUDE",
+      "name": "Change Symbol",
+      "field": "note",
+      "oldVal": "",
+      "newVal": "some res product has 1 ea"
+    },
     {
       "ts": "2026-09-02T18:26:53.247Z",
       "who": "Josh",
