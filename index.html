@@ -7,25 +7,44 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',system-ui,sans-serif;background:#0d1117;color:#e6edf3;padding:32px 24px 60px;max-width:900px;margin:0 auto;font-size:14px;line-height:1.5}
+body{font-family:'Inter',system-ui,sans-serif;background:#0d1117;color:#e6edf3;padding:32px 24px 60px;max-width:1000px;margin:0 auto;font-size:14px;line-height:1.5}
 h1{font-size:1.15rem;font-weight:600;margin-bottom:4px}
 .subtitle{font-size:.78rem;color:#7d8590;margin-bottom:24px}
-table{width:100%;border-collapse:collapse;border:1px solid #30363d;border-radius:6px;overflow:hidden}
+table{width:100%;border-collapse:collapse;border:1px solid #30363d;border-radius:6px;overflow:hidden;table-layout:fixed}
 th{text-align:left;font-size:.7rem;font-weight:600;color:#7d8590;text-transform:uppercase;letter-spacing:.04em;padding:8px 14px;background:#161b22;border-bottom:1px solid #30363d}
+th.col-name{width:24%}
+th.col-desc{width:33%}
 th.col-qty{width:65px;text-align:center}
-th.col-notes{width:40%}
-td{padding:8px 14px;border-bottom:1px solid #21262d;vertical-align:top;font-size:.84rem}
+th.col-notes{width:auto}
+th.col-del{width:36px;text-align:center}
+td{padding:4px 8px;border-bottom:1px solid #21262d;vertical-align:top;font-size:.84rem}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:#161b22}
-td.name{font-weight:500}
-td.desc{color:#7d8590;font-size:.78rem}
-td.qty{text-align:center}
+.qty{text-align:center;padding-top:8px}
+
+/* Seamless Inputs */
+.seamless-input{
+  width:100%;background:transparent;border:1px solid transparent;color:#e6edf3;
+  border-radius:4px;padding:4px 6px;font-size:inherit;font-family:inherit;
+  resize:none;overflow:hidden;line-height:1.4;transition:background 0.1s, border-color 0.1s;
+}
+.seamless-input:hover{background:rgba(255,255,255,.03)}
+.seamless-input:focus{outline:none;background:#0d1117;border-color:#d29922;box-shadow:0 0 0 2px rgba(210,153,34,.15)}
+.seamless-input::placeholder{color:#484f58}
+.seamless-input.name-in{font-weight:500}
+.seamless-input.desc-in{color:#7d8590;font-size:.78rem}
+.seamless-input.desc-in:focus{color:#e6edf3}
+
 .qty-input{width:44px;background:#161b22;border:1px solid #30363d;color:#e6edf3;border-radius:4px;padding:3px 4px;text-align:center;font-size:.84rem;font-family:inherit}
 .qty-input:focus{outline:none;border-color:#d29922;box-shadow:0 0 0 2px rgba(210,153,34,.15)}
 .qty-input.unknown{color:#484f58;font-style:italic}
-.note-input{width:100%;background:#0d1117;border:1px solid #30363d;color:#e6edf3;border-radius:4px;padding:5px 8px;font-size:.78rem;font-family:inherit;resize:none;line-height:1.4}
-.note-input:focus{outline:none;border-color:#d29922;box-shadow:0 0 0 2px rgba(210,153,34,.15)}
-.note-input::placeholder{color:#484f58}
+
+.del-btn{background:transparent;border:none;color:#484f58;cursor:pointer;font-size:1.1rem;padding:4px;border-radius:4px;margin-top:2px}
+.del-btn:hover{color:#f85149;background:rgba(248,81,73,.1)}
+.add-btn{margin-top:12px;background:transparent;border:1px dashed #30363d;color:#7d8590;width:100%;padding:10px;border-radius:6px;cursor:pointer;font-size:.84rem;transition:all .15s}
+.add-btn:hover{border-color:#d29922;color:#d29922}
+
+/* Modals & Toasts */
 .toast-box{position:fixed;top:16px;right:16px;z-index:99;display:flex;flex-direction:column;gap:8px;pointer-events:none}
 .toast{pointer-events:auto;background:#161b22;border:1px solid #30363d;border-left:3px solid #d29922;border-radius:6px;padding:10px 16px;font-size:.8rem;color:#e6edf3;box-shadow:0 4px 20px rgba(0,0,0,.4);animation:slideIn .25s ease;max-width:340px}
 .toast.out{animation:slideOut .2s ease forwards}
@@ -40,7 +59,9 @@ td.qty{text-align:center}
 .modal input:focus{outline:none;border-color:#d29922}
 .modal button{margin-top:12px;padding:7px 22px;background:#d29922;color:#0d1117;border:none;border-radius:6px;font-size:.84rem;font-family:inherit;font-weight:500;cursor:pointer}
 .modal button:hover{filter:brightness(1.1)}
-.log-section{margin-top:28px}
+
+/* Log */
+.log-section{margin-top:32px}
 .log-toggle{font-size:.82rem;color:#7d8590;cursor:pointer;user-select:none;display:flex;align-items:center;gap:6px}
 .log-toggle:hover{color:#e6edf3}
 .log-toggle .ct{font-size:.7rem;background:#21262d;padding:1px 6px;border-radius:8px}
@@ -68,19 +89,21 @@ tr.flash td{animation:rowFlash .5s ease}
 </div>
 
 <h1>Default Key Quantities</h1>
-<div class="subtitle">Click any quantity or notes field to edit. Changes save automatically.</div>
+<div class="subtitle">Fully editable: Click anywhere to edit names, descriptions, or quantities.</div>
 
 <table>
   <thead>
     <tr>
-      <th style="width:200px">Situation</th>
-      <th>Description</th>
+      <th class="col-name">Situation</th>
+      <th class="col-desc">Description</th>
       <th class="col-qty">Qty</th>
       <th class="col-notes">Notes</th>
+      <th class="col-del"></th>
     </tr>
   </thead>
   <tbody id="tbody"></tbody>
 </table>
+<button class="add-btn" onclick="addItem()">+ Add Row</button>
 
 <div class="log-section">
   <div class="log-toggle" onclick="toggleLog()">
@@ -93,30 +116,31 @@ tr.flash td{animation:rowFlash .5s ease}
 const REPO='NoLimitNexus/mk-key-ref',DATA_PATH='data.json';
 const GH_TOKEN=['g','h','o','_','6ab6ig','BMkyAy','RKAyGb','jPq8P0','rI5xzN','4Att1O'].join('');
 
+// Fallback items if repo is unreachable
 const ITEMS=[
   {id:'ck',name:'Change Key',desc:'Standard change key cylinder. Keys unique to each door.',qty:2,note:''},
   {id:'skd',name:'SKD (Single Keyed Different)',desc:'Same as a change key but called out separately on the order.',qty:2,note:''},
   {id:'nmk',name:'NMK (Not Master Keyed)',desc:'Keyed to its own symbol but not part of the master hierarchy.',qty:2,note:''},
-  {id:'ka',name:'KA (Keyed Alike)',desc:'Multiple cylinders sharing the same key. Often specified per group.',qty:2,note:''},
-  {id:'mk',name:'Master Key Cylinder',desc:'Cylinder keyed under a master. No keys ship with the cylinder itself.',qty:0,note:''},
+  {id:'ka',name:'KA (Keyed Alike)',desc:'Multiple cylinders sharing the same key.',qty:2,note:''},
+  {id:'mk',name:'Master Key Cylinder',desc:'Cylinder keyed under a master. No keys ship with cylinder.',qty:0,note:''},
   {id:'submaster',name:'Sub-Master Cylinder',desc:'Cylinder keyed under a sub-master.',qty:0,note:''},
   {id:'gm',name:'Grand Master Cylinder',desc:'Cylinder keyed under the grand master.',qty:0,note:''},
-  {id:'ggm',name:'GGM / TMK Cylinder',desc:'Top-level master cylinder. Keys ordered on a separate cut key line.',qty:0,note:''},
+  {id:'ggm',name:'GGM / TMK Cylinder',desc:'Top-level master cylinder.',qty:0,note:''},
   {id:'selective',name:'Selective Master Cylinder',desc:'Cross-keyed to a selective master path.',qty:0,note:''},
   {id:'x13x',name:'X13X Cross-Keyed (no own key)',desc:'Cross-keyed cylinder with no change key of its own.',qty:0,note:''},
   {id:'x_with_key',name:'Cross-Keyed WITH Own Key',desc:'Cross-keyed cylinder that also has its own change key symbol.',qty:2,note:''},
-  {id:'x_prefix',name:'X-Prefix + Symbol (e.g. XLA12)',desc:'Pinning is same as the base symbol. The X just documents the cross-keying. Keys are included.',qty:2,note:''},
+  {id:'x_prefix',name:'X-Prefix + Symbol (e.g. XLA12)',desc:'Pinning same as base symbol. Keys included.',qty:2,note:''},
   {id:'lkb',name:'LKB (Less Key Blank)',desc:'Cylinder is pinned but no physical keys ship.',qty:0,note:''},
-  {id:'const_core',name:'Construction Key Core',desc:'Core furnished without keys. Operating and control keys must be added manually.',qty:0,note:''},
-  {id:'zero_bit',name:'Zero Bitted',desc:'Cylinder shipped with all pins at zero. No operating key, used for temporary or field re-key.',qty:0,note:''},
-  {id:'control',name:'Control Key',desc:'Used with SFIC/FSIC to remove and swap cores.',qty:1,note:''},
-  {id:'new_master',name:'New Master Key (cut key order)',desc:'Ordering new cut master keys on a separate line item.',qty:2,note:''},
-  {id:'new_gm',name:'New Grand Master Key (cut key order)',desc:'Ordering new cut grand master keys on a separate line item.',qty:2,note:''},
-  {id:'new_ggm',name:'New GGM/TMK Key (cut key order)',desc:'Ordering new cut top master keys on a separate line item.',qty:2,note:''},
+  {id:'const_core',name:'Construction Key Core',desc:'Core furnished without keys.',qty:0,note:''},
+  {id:'zero_bit',name:'Zero Bitted',desc:'Cylinder shipped with all pins at zero.',qty:0,note:''},
+  {id:'control',name:'Control Key',desc:'Used with SFIC/FSIC to remove/swap cores.',qty:1,note:''},
+  {id:'new_master',name:'New Master Key (cut key)',desc:'New cut master keys.',qty:2,note:''},
+  {id:'new_gm',name:'New Grand Master Key (cut key)',desc:'New cut grand master keys.',qty:2,note:''},
+  {id:'new_ggm',name:'New GGM/TMK Key (cut key)',desc:'New cut top master keys.',qty:2,note:''},
   {id:'emergency',name:'Emergency Key',desc:'For 85/86 function locksets.',qty:null,note:''},
 ];
 
-let data=null, userName=localStorage.getItem('mkref_name')||'', remoteSha=null, pollTimer=null, saveTimer=null, logOpen=false, lastSync=null;
+let data=null, userName=localStorage.getItem('mkref_name')||'', remoteSha=null, pollTimer=null, saveTimer=null, logOpen=false;
 
 document.addEventListener('DOMContentLoaded', async()=>{
   data=await load();
@@ -128,7 +152,7 @@ document.addEventListener('DOMContentLoaded', async()=>{
 async function load(){
   try{
     const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`,{headers:{'Authorization':`Bearer ${GH_TOKEN}`,'Accept':'application/vnd.github.v3+json'}});
-    if(r.ok){const j=await r.json();remoteSha=j.sha;lastSync=Date.now();const d=JSON.parse(atob(j.content));localStorage.setItem('mkref_data',JSON.stringify(d));return d;}
+    if(r.ok){const j=await r.json();remoteSha=j.sha;const d=JSON.parse(atob(j.content));localStorage.setItem('mkref_data',JSON.stringify(d));return d;}
   }catch(e){}
   const local=localStorage.getItem('mkref_data');
   if(local)try{return JSON.parse(local)}catch(e){}
@@ -146,7 +170,7 @@ async function save(msg){
       method:'PUT',headers:{'Authorization':`Bearer ${GH_TOKEN}`,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
       body:JSON.stringify({message:msg||'Update',content:btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2)))),sha:remoteSha})
     });
-    if(r.ok){remoteSha=(await r.json()).content.sha;lastSync=Date.now();}
+    if(r.ok) remoteSha=(await r.json()).content.sha;
   }catch(e){}
 }
 
@@ -154,15 +178,13 @@ async function poll(){
   try{
     const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`,{headers:{'Authorization':`Bearer ${GH_TOKEN}`,'Accept':'application/vnd.github.v3+json'}});
     if(!r.ok)return;const j=await r.json();
-    if(j.sha!==remoteSha){remoteSha=j.sha;const remote=JSON.parse(atob(j.content));
-      const diffs=[];
-      for(const ri of remote.items){const li=data.items.find(i=>i.id===ri.id);if(!li)continue;
-        if(ri.qty!==li.qty)diffs.push({name:ri.name,f:'qty',o:li.qty,n:ri.qty});
-        if((ri.note||'')!==(li.note||''))diffs.push({name:ri.name,f:'note',o:li.note,n:ri.note});
-      }
-      if(diffs.length){data=remote;localStorage.setItem('mkref_data',JSON.stringify(data));render();
-        for(const d of diffs){const l=d.f==='qty'?`qty: ${d.o??'?'} \u2192 ${d.n??'?'}`:'note updated';
-          toast(`${d.name} \u2014 ${l}`);}
+    if(j.sha!==remoteSha){
+      remoteSha=j.sha;const remote=JSON.parse(atob(j.content));
+      if(JSON.stringify(remote.items)!==JSON.stringify(data.items)){
+          data=remote;
+          localStorage.setItem('mkref_data',JSON.stringify(data));
+          render();
+          toast("List was updated by another user.");
       }
     }
   }catch(e){}
@@ -174,12 +196,39 @@ function render(){
   renderLog();
 }
 
+function autoExpand(el){
+    el.style.height='auto';
+    el.style.height=Math.max(el.scrollHeight,26)+'px';
+}
+
 function makeRow(item){
   const tr=document.createElement('tr');tr.dataset.id=item.id;
 
-  const tdN=document.createElement('td');tdN.className='name';tdN.textContent=item.name;
-  const tdD=document.createElement('td');tdD.className='desc';tdD.textContent=item.desc||'';
+  // Name (Editable)
+  const tdN=document.createElement('td');
+  const nIn=document.createElement('textarea');nIn.className='seamless-input name-in';nIn.placeholder='Name...';
+  nIn.value=item.name||'';nIn.rows=1;
+  nIn.addEventListener('input',function(){autoExpand(this);});
+  nIn.addEventListener('blur',function(){
+    const nv=this.value.trim();if(nv===(item.name||''))return;
+    const old=item.name;item.name=nv;logChange(item.id,old||'Row','renamed',old,nv);
+  });
+  tdN.appendChild(nIn);
+  requestAnimationFrame(()=>autoExpand(nIn));
 
+  // Desc (Editable)
+  const tdD=document.createElement('td');
+  const dIn=document.createElement('textarea');dIn.className='seamless-input desc-in';dIn.placeholder='Description...';
+  dIn.value=item.desc||'';dIn.rows=1;
+  dIn.addEventListener('input',function(){autoExpand(this);});
+  dIn.addEventListener('blur',function(){
+    const nv=this.value.trim();if(nv===(item.desc||''))return;
+    const old=item.desc;item.desc=nv;logChange(item.id,item.name||'Row','description changed',old,nv);
+  });
+  tdD.appendChild(dIn);
+  requestAnimationFrame(()=>autoExpand(dIn));
+
+  // Qty
   const tdQ=document.createElement('td');tdQ.className='qty';
   const qi=document.createElement('input');qi.className='qty-input'+(item.qty===null?' unknown':'');
   qi.value=item.qty!==null?item.qty:'?';
@@ -189,24 +238,54 @@ function makeRow(item){
     if(raw!==''&&raw!=='?'&&isNaN(nq)){this.value=item.qty!==null?item.qty:'?';return;}
     if(nq===item.qty){if(item.qty===null)this.value='?';return;}
     const old=item.qty;item.qty=nq;this.value=nq!==null?nq:'?';this.className='qty-input'+(nq===null?' unknown':'');
-    logChange(item.id,item.name,'qty',old,nq);
+    logChange(item.id,item.name||'Row','qty',old,nq);
     tr.classList.add('flash');setTimeout(()=>tr.classList.remove('flash'),600);
   });
   qi.addEventListener('keydown',function(e){if(e.key==='Enter'){this.blur();e.preventDefault();}});
   tdQ.appendChild(qi);
 
+  // Note
   const tdNo=document.createElement('td');
-  const ni=document.createElement('textarea');ni.className='note-input';ni.placeholder='Add a note...';
+  const ni=document.createElement('textarea');ni.className='seamless-input';ni.placeholder='Add note...';
   ni.value=item.note||'';ni.rows=1;
-  ni.addEventListener('input',function(){this.style.height='auto';this.style.height=Math.max(this.scrollHeight,28)+'px';});
+  ni.addEventListener('input',function(){autoExpand(this);});
   ni.addEventListener('blur',function(){
     const nv=this.value.trim();if(nv===(item.note||''))return;
-    const old=item.note;item.note=nv;logChange(item.id,item.name,'note',old,nv);
+    const old=item.note;item.note=nv;logChange(item.id,item.name||'Row','note',old,nv);
   });
   tdNo.appendChild(ni);
-  requestAnimationFrame(()=>{ni.style.height='auto';ni.style.height=Math.max(ni.scrollHeight,28)+'px';});
+  requestAnimationFrame(()=>autoExpand(ni));
 
-  tr.append(tdN,tdD,tdQ,tdNo);return tr;
+  // Delete
+  const tdDel=document.createElement('td');tdDel.style.textAlign='center';
+  const delBtn=document.createElement('button');delBtn.className='del-btn';delBtn.innerHTML='&times;';delBtn.title='Delete row';
+  delBtn.onclick=()=>deleteItem(item.id);
+  tdDel.appendChild(delBtn);
+
+  tr.append(tdN,tdD,tdQ,tdNo,tdDel);return tr;
+}
+
+function addItem(){
+  const id='item_'+Date.now();
+  data.items.push({id,name:'',desc:'',qty:null,note:''});
+  render();
+  logChange(id,'New Row','added',null,null);
+  const rows = document.querySelectorAll('#tbody tr');
+  if(rows.length){
+      const lastRow = rows[rows.length-1];
+      const nameIn = lastRow.querySelector('.name-in');
+      if(nameIn) nameIn.focus();
+  }
+}
+
+function deleteItem(id){
+  const idx=data.items.findIndex(i=>i.id===id);
+  if(idx<0)return;
+  const item=data.items[idx];
+  if(!confirm(`Delete "${item.name||'this row'}"?`))return;
+  data.items.splice(idx,1);
+  render();
+  logChange(id,item.name||'Row','deleted',null,null);
 }
 
 function logChange(id,name,field,oldVal,newVal){
@@ -214,7 +293,7 @@ function logChange(id,name,field,oldVal,newVal){
     oldVal:oldVal===null?null:String(oldVal),newVal:newVal===null?null:String(newVal)});
   if(data.changelog.length>200)data.changelog.length=200;
   clearTimeout(saveTimer);
-  saveTimer=setTimeout(()=>save(`${userName||'User'}: ${name} ${field} changed`),1500);
+  saveTimer=setTimeout(()=>save(`${userName||'User'}: ${name} ${field} updated`),1500);
   renderLog();
 }
 
@@ -225,8 +304,11 @@ function renderLog(){
   if(!log.length){w.innerHTML='<div class="log-list" style="padding:14px;text-align:center;color:#484f58;font-size:.78rem">No changes yet.</div>';return;}
   let h='<div class="log-list">';
   for(const e of log.slice(0,40)){
-    const diff=e.field==='qty'?`<span class="old">${e.oldVal??'?'}</span> \u2192 <span class="new">${e.newVal??'?'}</span>`
-      :`note: "${(e.newVal||'').substring(0,50)}${(e.newVal||'').length>50?'...':''}"`;
+    let diff='';
+    if(e.field==='qty') diff=`<span class="old">${e.oldVal??'?'}</span> \u2192 <span class="new">${e.newVal??'?'}</span>`;
+    else if(e.field==='added') diff='<span class="new">Row added</span>';
+    else if(e.field==='deleted') diff='<span class="old">Row deleted</span>';
+    else diff=`${e.field}: "${(e.newVal||'').substring(0,40)}${(e.newVal||'').length>40?'...':''}"`;
     h+=`<div class="log-item"><strong>${e.name}</strong> \u2014 ${diff}<br>${e.who}, ${timeAgo(e.ts)}</div>`;
   }
   w.innerHTML=h+'</div>';
