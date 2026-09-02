@@ -105,7 +105,7 @@ tr.flash td{animation:rowFlash .5s ease}
 </table>
 <button class="add-btn" onclick="addItem()">+ Add Row</button>
 
-<div class="log-section">
+<div class="log-section" id="logSection" style="display:none;">
   <div class="log-toggle" onclick="toggleLog()">
     <span id="logArrow">&#9654;</span> Change History <span class="ct" id="logCount">0</span>
   </div>
@@ -298,11 +298,17 @@ function logChange(id,name,field,oldVal,newVal){
 }
 
 function renderLog(){
+  if(userName.toLowerCase() !== 'josh'){
+    document.getElementById('logSection').style.display='none';
+    return;
+  }
+  document.getElementById('logSection').style.display='block';
+
   const log=data.changelog||[];
   document.getElementById('logCount').textContent=log.length;
   const w=document.getElementById('logWrap');
-  if(!log.length){w.innerHTML='<div class="log-list" style="padding:14px;text-align:center;color:#484f58;font-size:.78rem">No changes yet.</div>';return;}
-  let h='<div class="log-list">';
+  if(!log.length){w.innerHTML='<div style="font-size:0.75rem; color:#d29922; padding-bottom:8px;">Visible only to Josh</div><div class="log-list" style="padding:14px;text-align:center;color:#484f58;font-size:.78rem">No changes yet.</div>';return;}
+  let h='<div style="font-size:0.75rem; color:#d29922; padding-bottom:8px;">Visible only to Josh</div><div class="log-list">';
   for(const e of log.slice(0,40)){
     let diff='';
     if(e.field==='qty') diff=`<span class="old">${e.oldVal??'?'}</span> \u2192 <span class="new">${e.newVal??'?'}</span>`;
