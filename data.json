@@ -30,13 +30,6 @@
     },
     {
       "note": "",
-      "name": "Selective Master Cylinder",
-      "id": "selective",
-      "qty": 0,
-      "desc": "Cross-keyed to a selective master path."
-    },
-    {
-      "note": "",
       "name": "X--X Cross-Keyed \n(no own key)",
       "id": "x13x",
       "qty": 0,
@@ -86,6 +79,22 @@
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T20:40:07.971Z",
+      "who": "DUDE",
+      "name": "Row",
+      "field": "deleted",
+      "oldVal": null,
+      "newVal": null
+    },
+    {
+      "ts": "2026-09-02T20:39:28.932Z",
+      "who": "DUDE",
+      "name": "Selective Master Cylinder",
+      "field": "renamed",
+      "oldVal": "Selective Master Cylinder",
+      "newVal": ""
+    },
     {
       "ts": "2026-09-02T20:39:03.646Z",
       "who": "DUDE",
