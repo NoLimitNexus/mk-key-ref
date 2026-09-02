@@ -64,7 +64,7 @@
       "desc": "Cylinder is pinned but no physical keys ship."
     },
     {
-      "note": "",
+      "note": "must add extractor tool and ship",
       "name": "Construction Key Core (CK)",
       "id": "const_core",
       "qty": 0,
@@ -86,6 +86,14 @@
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T15:16:39.498Z",
+      "who": "Josh",
+      "name": "Construction Key Core (CK)",
+      "field": "note",
+      "oldVal": "",
+      "newVal": "must add extractor tool and ship"
+    },
     {
       "ts": "2026-09-02T15:16:18.802Z",
       "who": "Josh",
