@@ -78,7 +78,7 @@
       "desc": "Cylinder shipped with all pins at zero. No operating key, used for temporary or field re-key."
     },
     {
-      "note": "",
+      "note": "123",
       "name": "Control Key",
       "id": "control",
       "qty": 1,
@@ -86,6 +86,14 @@
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T18:13:23.873Z",
+      "who": "Josh",
+      "name": "Control Key",
+      "field": "note",
+      "oldVal": "",
+      "newVal": "123"
+    },
     {
       "ts": "2026-09-02T18:12:05.114Z",
       "who": "Josh",
