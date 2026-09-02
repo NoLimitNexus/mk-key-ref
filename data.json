@@ -37,7 +37,7 @@
     },
     {
       "note": "",
-      "name": "X13X Cross-Keyed (no own key)",
+      "name": "X--X Cross-Keyed \n(no own key)",
       "id": "x13x",
       "qty": 0,
       "desc": "Cross-keyed cylinder with no change key of its own."
@@ -86,6 +86,14 @@
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T15:15:15.227Z",
+      "who": "Josh",
+      "name": "X13X Cross-Keyed (no own key)",
+      "field": "renamed",
+      "oldVal": "X13X Cross-Keyed (no own key)",
+      "newVal": "X--X Cross-Keyed \n(no own key)"
+    },
     {
       "ts": "2026-09-02T15:14:50.172Z",
       "who": "Josh",
