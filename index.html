@@ -314,7 +314,19 @@ function renderLog(){
     if(e.field==='qty') diff=`<span class="old">${e.oldVal??'?'}</span> \u2192 <span class="new">${e.newVal??'?'}</span>`;
     else if(e.field==='added') diff='<span class="new">Row added</span>';
     else if(e.field==='deleted') diff='<span class="old">Row deleted</span>';
-    else diff=`${e.field}: "${(e.newVal||'').substring(0,40)}${(e.newVal||'').length>40?'...':''}"`;
+    else {
+      const oldV = e.oldVal || '';
+      const newV = e.newVal || '';
+      const oldTxt = oldV ? `"${oldV.substring(0,60)}${oldV.length>60?'...':''}"` : 'nothing';
+      const newTxt = newV ? `"${newV.substring(0,60)}${newV.length>60?'...':''}"` : 'nothing';
+      let fieldName = e.field;
+      if (fieldName === 'renamed') fieldName = 'name';
+      if (fieldName === 'description changed') fieldName = 'description';
+
+      if (!oldV && newV) diff = `<span class="new">Added ${fieldName}</span>: ${newTxt}`;
+      else if (oldV && !newV) diff = `<span class="old">Removed ${fieldName}</span> (was ${oldTxt})`;
+      else diff = `Changed ${fieldName}: <span class="old">${oldTxt}</span> &rarr; <span class="new">${newTxt}</span>`;
+    }
     h+=`<div class="log-item"><strong>${e.name}</strong> \u2014 ${diff}<br>${e.who}, ${timeAgo(e.ts)}</div>`;
   }
   w.innerHTML=h+'</div>';
