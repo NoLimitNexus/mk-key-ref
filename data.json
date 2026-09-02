@@ -67,7 +67,7 @@
       "note": "must add extractor tool and ship",
       "name": "Construction Key Core (CK)",
       "id": "const_core",
-      "qty": 0,
+      "qty": 1,
       "desc": "Core furnished without keys. Operating and control keys must be added manually."
     },
     {
@@ -86,6 +86,14 @@
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T15:16:44.177Z",
+      "who": "Josh",
+      "name": "Construction Key Core (CK)",
+      "field": "qty",
+      "oldVal": "0",
+      "newVal": "1"
+    },
     {
       "ts": "2026-09-02T15:16:39.498Z",
       "who": "Josh",
