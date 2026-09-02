@@ -65,7 +65,7 @@
     },
     {
       "note": "",
-      "name": "Construction Key Core",
+      "name": "Construction Key Core (CK)",
       "id": "const_core",
       "qty": 0,
       "desc": "Core furnished without keys. Operating and control keys must be added manually."
@@ -86,6 +86,14 @@
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T15:16:18.802Z",
+      "who": "Josh",
+      "name": "Construction Key Core",
+      "field": "renamed",
+      "oldVal": "Construction Key Core",
+      "newVal": "Construction Key Core (CK)"
+    },
     {
       "ts": "2026-09-02T15:15:38.234Z",
       "who": "Josh",
