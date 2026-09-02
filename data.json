@@ -2,7 +2,7 @@
   "items": [
     {
       "note": "",
-      "name": "Change Key",
+      "name": "Change Symbol",
       "id": "ck",
       "qty": 2,
       "desc": "Standard change key cylinder. Keys unique to each door."
@@ -86,6 +86,14 @@
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T15:14:50.172Z",
+      "who": "Josh",
+      "name": "Change Key",
+      "field": "renamed",
+      "oldVal": "Change Key",
+      "newVal": "Change Symbol"
+    },
     {
       "ts": "2026-09-02T15:14:44.931Z",
       "who": "Josh",
