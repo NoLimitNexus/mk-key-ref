@@ -30,13 +30,6 @@
     },
     {
       "note": "",
-      "name": "Grand Master Cylinder",
-      "id": "gm",
-      "qty": 0,
-      "desc": "Cylinder keyed under the grand master."
-    },
-    {
-      "note": "",
       "name": "GGM / TMK Cylinder",
       "id": "ggm",
       "qty": 0,
@@ -128,6 +121,14 @@
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T14:43:02.959Z",
+      "who": "Josh",
+      "name": "Grand Master Cylinder",
+      "field": "deleted",
+      "oldVal": null,
+      "newVal": null
+    },
     {
       "ts": "2026-09-02T14:42:59.950Z",
       "who": "Josh",
