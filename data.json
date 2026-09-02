@@ -65,7 +65,7 @@
     },
     {
       "note": "must add extractor tool and ship",
-      "name": "Construction Key Core (CK)",
+      "name": "Construction Key Core (CK) \nSplit Key",
       "id": "const_core",
       "qty": 1,
       "desc": "Core furnished without keys. Operating and control keys must be added manually."
@@ -86,6 +86,14 @@
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T15:16:51.417Z",
+      "who": "Josh",
+      "name": "Construction Key Core (CK)",
+      "field": "renamed",
+      "oldVal": "Construction Key Core (CK)",
+      "newVal": "Construction Key Core (CK) \nSplit Key"
+    },
     {
       "ts": "2026-09-02T15:16:44.177Z",
       "who": "Josh",
