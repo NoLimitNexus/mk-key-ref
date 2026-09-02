@@ -16,7 +16,7 @@
     },
     {
       "note": "primus might change - will be called out on RPA",
-      "name": "KA (Keyed Alike)",
+      "name": "KA/1-0 bit/Group/Qty/Spec Combos",
       "id": "ka",
       "qty": 2,
       "desc": "Multiple cylinders sharing the same key."
@@ -58,13 +58,6 @@
     },
     {
       "note": "",
-      "name": "Zero/One Bitted",
-      "id": "zero_bit",
-      "qty": 2,
-      "desc": "Cylinder shipped with all pins at zero. No operating key, used for temporary or field re-key."
-    },
-    {
-      "note": "",
       "name": "Control Key",
       "id": "control",
       "qty": 1,
@@ -72,6 +65,22 @@
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T20:45:22.148Z",
+      "who": "DUDE",
+      "name": "Zero/One Bitted",
+      "field": "deleted",
+      "oldVal": null,
+      "newVal": null
+    },
+    {
+      "ts": "2026-09-02T20:45:20.481Z",
+      "who": "DUDE",
+      "name": "KA (Keyed Alike)",
+      "field": "renamed",
+      "oldVal": "KA (Keyed Alike)",
+      "newVal": "KA/1-0 bit/Group/Qty/Spec Combos"
+    },
     {
       "ts": "2026-09-02T20:44:31.350Z",
       "who": "DUDE",
