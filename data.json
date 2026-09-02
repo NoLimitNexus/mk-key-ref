@@ -44,13 +44,6 @@
     },
     {
       "note": "",
-      "name": "GGM / TMK Cylinder",
-      "id": "ggm",
-      "qty": 0,
-      "desc": "Top-level master cylinder. Keys ordered on a separate cut key line."
-    },
-    {
-      "note": "",
       "name": "Selective Master Cylinder",
       "id": "selective",
       "qty": 0,
@@ -135,6 +128,14 @@
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T14:42:54.694Z",
+      "who": "Josh",
+      "name": "GGM / TMK Cylinder",
+      "field": "deleted",
+      "oldVal": null,
+      "newVal": null
+    },
     {
       "ts": "2026-09-02T14:42:20.592Z",
       "who": "Josh",
