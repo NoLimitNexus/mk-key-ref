@@ -50,7 +50,7 @@
       "desc": "Cylinder is pinned but no physical keys ship."
     },
     {
-      "note": "must add 1 extractor tool and ship 2nd day air pm",
+      "note": "must add 1 extractor tool and ship 2nd day air pm & construction master key",
       "name": "Construction Key Core (CK) \nSplit Key",
       "id": "const_core",
       "qty": 2,
@@ -72,6 +72,14 @@
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T20:44:24.062Z",
+      "who": "DUDE",
+      "name": "Construction Key Core (CK) \nSplit Key",
+      "field": "note",
+      "oldVal": "must add 1 extractor tool and ship 2nd day air pm",
+      "newVal": "must add 1 extractor tool and ship 2nd day air pm & construction master key"
+    },
     {
       "ts": "2026-09-02T20:43:31.500Z",
       "who": "DUDE",
