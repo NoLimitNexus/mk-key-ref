@@ -83,16 +83,17 @@
       "id": "control",
       "qty": 1,
       "desc": "always include 1 control key with new 7 pin systems"
-    },
-    {
-      "note": "",
-      "name": "Emergency Key",
-      "id": "emergency",
-      "qty": null,
-      "desc": "For 85/86 function locksets."
     }
   ],
   "changelog": [
+    {
+      "ts": "2026-09-02T14:44:50.276Z",
+      "who": "Josh",
+      "name": "Emergency Key",
+      "field": "deleted",
+      "oldVal": null,
+      "newVal": null
+    },
     {
       "ts": "2026-09-02T14:44:43.692Z",
       "who": "Josh",
