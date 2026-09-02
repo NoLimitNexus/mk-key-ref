@@ -1,91 +1,98 @@
 {
-    "items":  [
-                  {
-                      "note":  "",
-                      "name":  "Change Key",
-                      "id":  "ck",
-                      "qty":  2,
-                      "desc":  "Standard change key cylinder. Keys unique to each door."
-                  },
-                  {
-                      "note":  "",
-                      "name":  "SKD (Single Keyed Different)",
-                      "id":  "skd",
-                      "qty":  2,
-                      "desc":  "Same as a change key but called out separately on the order."
-                  },
-                  {
-                      "note":  "",
-                      "name":  "KA (Keyed Alike)",
-                      "id":  "ka",
-                      "qty":  2,
-                      "desc":  "Multiple cylinders sharing the same key. Often specified per group."
-                  },
-                  {
-                      "note":  "",
-                      "name":  "Master Key Cylinder",
-                      "id":  "mk",
-                      "qty":  0,
-                      "desc":  "Cylinder keyed under a master. No keys ship with the cylinder itself."
-                  },
-                  {
-                      "note":  "",
-                      "name":  "Selective Master Cylinder",
-                      "id":  "selective",
-                      "qty":  0,
-                      "desc":  "Cross-keyed to a selective master path."
-                  },
-                  {
-                      "note":  "",
-                      "name":  "X13X Cross-Keyed (no own key)",
-                      "id":  "x13x",
-                      "qty":  0,
-                      "desc":  "Cross-keyed cylinder with no change key of its own."
-                  },
-                  {
-                      "note":  "",
-                      "name":  "Cross-Keyed WITH Own Key",
-                      "id":  "x_with_key",
-                      "qty":  2,
-                      "desc":  "Cross-keyed cylinder that also has its own change key symbol."
-                  },
-                  {
-                      "note":  "",
-                      "name":  "X-Prefix + Symbol (e.g. XLA12)",
-                      "id":  "x_prefix",
-                      "qty":  2,
-                      "desc":  "Pinning is same as the base symbol. The X just documents the cross-keying. Keys are included."
-                  },
-                  {
-                      "note":  "",
-                      "name":  "LKB (Less Key Blank)",
-                      "id":  "lkb",
-                      "qty":  0,
-                      "desc":  "Cylinder is pinned but no physical keys ship."
-                  },
-                  {
-                      "note":  "",
-                      "name":  "Construction Key Core",
-                      "id":  "const_core",
-                      "qty":  0,
-                      "desc":  "Core furnished without keys. Operating and control keys must be added manually."
-                  },
-                  {
-                      "note":  "",
-                      "name":  "Zero/One Bitted",
-                      "id":  "zero_bit",
-                      "qty":  0,
-                      "desc":  "Cylinder shipped with all pins at zero. No operating key, used for temporary or field re-key."
-                  },
-                  {
-                      "note":  "",
-                      "name":  "Control Key",
-                      "id":  "control",
-                      "qty":  1,
-                      "desc":  "always include 1 control key with new 7 pin systems"
-                  }
-              ],
-    "changelog":  [
-
-                  ]
+  "items": [
+    {
+      "note": "",
+      "name": "Change Key",
+      "id": "ck",
+      "qty": 2,
+      "desc": "Standard change key cylinder. Keys unique to each door."
+    },
+    {
+      "note": "",
+      "name": "SKD (Single Keyed Different)",
+      "id": "skd",
+      "qty": 2,
+      "desc": "Same as a change key but called out separately on the order."
+    },
+    {
+      "note": "",
+      "name": "KA (Keyed Alike)",
+      "id": "ka",
+      "qty": 2,
+      "desc": "Multiple cylinders sharing the same key. Often specified per group."
+    },
+    {
+      "note": "",
+      "name": "Master Symbol",
+      "id": "mk",
+      "qty": 0,
+      "desc": "Cylinder keyed under a master. No keys ship with the cylinder itself."
+    },
+    {
+      "note": "",
+      "name": "Selective Master Cylinder",
+      "id": "selective",
+      "qty": 0,
+      "desc": "Cross-keyed to a selective master path."
+    },
+    {
+      "note": "",
+      "name": "X13X Cross-Keyed (no own key)",
+      "id": "x13x",
+      "qty": 0,
+      "desc": "Cross-keyed cylinder with no change key of its own."
+    },
+    {
+      "note": "",
+      "name": "Cross-Keyed WITH Own Key",
+      "id": "x_with_key",
+      "qty": 2,
+      "desc": "Cross-keyed cylinder that also has its own change key symbol."
+    },
+    {
+      "note": "",
+      "name": "X-Prefix + Symbol (e.g. XLA12)",
+      "id": "x_prefix",
+      "qty": 2,
+      "desc": "Pinning is same as the base symbol. The X just documents the cross-keying. Keys are included."
+    },
+    {
+      "note": "",
+      "name": "LKB (Less Key Blank)",
+      "id": "lkb",
+      "qty": 0,
+      "desc": "Cylinder is pinned but no physical keys ship."
+    },
+    {
+      "note": "",
+      "name": "Construction Key Core",
+      "id": "const_core",
+      "qty": 0,
+      "desc": "Core furnished without keys. Operating and control keys must be added manually."
+    },
+    {
+      "note": "",
+      "name": "Zero/One Bitted",
+      "id": "zero_bit",
+      "qty": 0,
+      "desc": "Cylinder shipped with all pins at zero. No operating key, used for temporary or field re-key."
+    },
+    {
+      "note": "",
+      "name": "Control Key",
+      "id": "control",
+      "qty": 1,
+      "desc": "always include 1 control key with new 7 pin systems"
+    }
+  ],
+  "changelog": [
+    {
+      "ts": "2026-09-02T15:14:44.931Z",
+      "who": "Josh",
+      "name": "Master Key Cylinder",
+      "field": "renamed",
+      "oldVal": "Master Key Cylinder",
+      "newVal": "Master Symbol"
+    }
+  ]
 }
